@@ -20,6 +20,20 @@ export function Nav() {
           <button className="nav-link tab" id="categorias-tab" data-bs-toggle="tab" data-bs-target="#categorias" type="button" role="tab" aria-controls="categorias" aria-selected="false">Gestion de Categorias</button>
         </li>
       </ul>
+      <div className="tab-content text-center" id="myTabContent">
+        <div className="tab-pane fade show active" id="ventas" role="tabpanel" aria-labelledby="ventas-tab">
+          {/* Contenido del tab de ventas */}
+        </div>
+        <div className="tab-pane fade" id="productos" role="tabpanel" aria-labelledby="productos-tab">
+          {/* Contenido del tab de productos */}
+        </div>
+        <div className="tab-pane fade" id="meseros" role="tabpanel" aria-labelledby="meseros-tab">
+          {/* Contenido del tab de meseros */}
+        </div>
+        <div className="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
+          {/* Contenido del tab de categorías */}
+        </div>
+      </div>
     </div>
   );
 }
