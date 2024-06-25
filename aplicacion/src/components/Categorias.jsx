@@ -1,4 +1,5 @@
 import React from "react";
+import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
 
 export function Categorias() {
   return (
@@ -37,6 +38,7 @@ export function Categorias() {
           </fieldset>
         </form>
       </div>
+      <EditarCategoriaModal/>
     </div>
   );
 }

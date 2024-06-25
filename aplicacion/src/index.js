@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Nav } from "./Nav";
-import { Ventas } from "./Ventas";
-import { Productos } from "./Productos";
-import { Meseros } from "./Meseros";
-import { Categorias } from "./Categorias";
-import { Footer } from "./Footer";
+import { Nav } from "./components/Nav";
+import { Ventas } from "./components/Ventas";
+import { Productos } from "./components/Productos";
+import { Meseros } from "./components/Meseros";
+import { Categorias } from "./components/Categorias";
+import { Footer } from "./components/Footer";
+
 
 ReactDOM.render(<Nav />, document.getElementById("nav"));
 
