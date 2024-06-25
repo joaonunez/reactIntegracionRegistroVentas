@@ -1,9 +1,7 @@
 import React from "react";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
-import { productos, actualizarDropdownProductos, actualizarTablaProductos, validarYAgregarProducto } from '../scripts/producto';
 export function Ventas() {
- 
   return (
     <div>
       <form
@@ -100,9 +98,10 @@ export function Ventas() {
         </div>
       </form>
 
-      <div class="mt-5 container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
+      <div class="mt-5 container-fluid m-auto text-center fw-bold col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
         <h3>Ventas Registradas en el Sistema</h3>
       </div>
+      <div class="miTabla mb-5 col-12 m-auto container">
       <div class="mb-3 col-10 col-xxl-3">
         <label for="buscarVentas" class="form-label justify-content-start">
           Buscar venta por ID
@@ -114,7 +113,6 @@ export function Ventas() {
           placeholder="Buscar venta por ID..."
         />
       </div>
-      <div class="miTabla mb-5 col-12 m-auto">
         <table
           class="container table table-striped table-bordered border-info text-center"
           id="tablaVentas"

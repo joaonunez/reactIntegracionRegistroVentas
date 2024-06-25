@@ -6,11 +6,11 @@ export function Meseros() {
       <div className="container-fluid m-auto text-center fw-bold rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xl-1 mt-1 mb-5">
         <h3>Meseros</h3>
       </div>
+      <div className="miTabla mb-5 col-12 m-auto container">
       <div className="mb-3 col-10 col-xxl-3">
         <label htmlFor="buscarMeseros" className="form-label justify-content-start">Buscar mesero por ID</label>
         <input type="text" id="buscarMeseros" className="form-control" placeholder="Buscar mesero por ID..." />
       </div>
-      <div className="miTabla mb-5 col-12 m-auto">
         <table className="container table table-striped table-bordered border-info text-center" id="tablaMeseros">
           <thead>
             <tr>
@@ -40,7 +40,7 @@ export function Meseros() {
                 por favor ingresa un nombre
               </div>
             </div>
-            <button type="submit" className="btn btn-info" id="agregarMeseroButton">Agregar Mesero</button>
+            <button type="submit" className="btn btn-info col-xl-5 m-auto text-center" id="agregarMeseroButton">Agregar Mesero</button>
           </fieldset>
         </form>
       </div>
