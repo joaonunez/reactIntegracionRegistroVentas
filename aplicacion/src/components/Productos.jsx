@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { EditarProductoModal } from '../modals/EditarProductoModal';
+import useValidation from '../utils/validacion'; // Importa el hook de validación
+
 export function Productos() {
+  useValidation(); // Utiliza el hook de validación
 
   return (
     <div>
@@ -8,10 +11,10 @@ export function Productos() {
         <h3>Productos</h3>
       </div>
       <div className="miTabla mb-5 col-12 m-auto container">
-      <div className="mb-3 col-xxl-3 col-10">
-        <label htmlFor="buscarProductos" className="form-label justify-content-start">Buscar producto por ID</label>
-        <input type="text" id="buscarProductos" className="form-control" placeholder="Buscar producto por ID..." />
-      </div>
+        <div className="mb-3 col-xxl-3 col-10">
+          <label htmlFor="buscarProductos" className="form-label justify-content-start">Buscar producto por ID</label>
+          <input type="text" id="buscarProductos" className="form-control" placeholder="Buscar producto por ID..." />
+        </div>
         <table className="container table table-striped table-bordered border-info text-center" id="tablaProductos2">
           <thead>
             <tr>
@@ -58,7 +61,7 @@ export function Productos() {
           </fieldset>
         </form>
       </div>
-      <EditarProductoModal/>
+      <EditarProductoModal />
     </div>
   );
 }
