@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { EditarProductoModal } from '../modals/EditarProductoModal';
-import useValidation from '../utils/validacion'; // Importa el hook de validación
+import useValidation from '../utils/validacion';
+import { actualizarTablaProductos, actualizarDropdownProductos, validarYAgregarProducto } from '../utils/producto';
 
 export function Productos() {
-  useValidation(); // Utiliza el hook de validación
+  useValidation();
+
+  useEffect(() => {
+    document.getElementById('agregarProductoButton').addEventListener('click', validarYAgregarProducto);
+    actualizarTablaProductos();
+    actualizarDropdownProductos();
+  }, []);
 
   return (
     <div>
@@ -57,7 +64,7 @@ export function Productos() {
                 por favor ingresa un precio valido
               </div>
             </div>
-            <button type="submit" className="btn btn-info" id="agregarProductoButton">Agregar Producto</button>
+            <button type="button" className="btn btn-info" id="agregarProductoButton">Agregar Producto</button>
           </fieldset>
         </form>
       </div>

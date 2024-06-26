@@ -1,6 +1,7 @@
 import React from 'react';
 import { EditarMeseroModal } from '../modals/EditarMeseroModal';
 import useValidation from '../utils/validacion'; // Importa el hook de validación
+import { validarYAgregarMesero } from '../utils/mesero'; // Importar la función desde mesero.js
 
 export function Meseros() {
   useValidation(); // Utiliza el hook de validación
@@ -44,7 +45,7 @@ export function Meseros() {
                 por favor ingresa un nombre
               </div>
             </div>
-            <button type="submit" className="btn btn-info col-xl-5 m-auto text-center" id="agregarMeseroButton">Agregar Mesero</button>
+            <button type="submit" className="btn btn-info col-xl-5 m-auto text-center" id="agregarMeseroButton" onClick={validarYAgregarMesero}>Agregar Mesero</button>
           </fieldset>
         </form>
       </div>

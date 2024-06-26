@@ -1,47 +1,48 @@
 import React from "react";
+
 export function EditarCategoriaModal() {
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="modalEditarCategoria"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="modalEditarCategoriaLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalEditarCategoriaLabel">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="modalEditarCategoriaLabel">
               Editar Categoría
             </h5>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <form
               id="formEditarCategoria"
-              class="needs-validation-categorias"
-              novalidate
+              className="needs-validation-categorias"
+              noValidate
             >
-              <div class="mb-3">
-                <label for="editarNombreCategoria" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="editarNombreCategoria" className="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="editarNombreCategoria"
                   required
                 />
-                <div class="invalid-feedback">
+                <div className="invalid-feedback">
                   por favor ingresa un nombre de categoria
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar Cambios
               </button>
             </form>

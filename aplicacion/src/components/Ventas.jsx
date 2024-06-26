@@ -5,7 +5,7 @@ import { validarYIngresarVenta, mostrarVentas } from '../utils/venta';
 
 export function Ventas() {
   useEffect(() => {
-    document.getElementById('ingresarVentaButton').addEventListener('click', validarYIngresarVenta);
+    document.getElementById('ingresarVentaButton')?.addEventListener('click', validarYIngresarVenta);
     mostrarVentas();
   }, []);
 

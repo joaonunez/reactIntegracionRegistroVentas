@@ -1,5 +1,22 @@
+// validacion.js
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+
+export const validarFormularioModal = (formId) => {
+  const form = document.getElementById(formId);
+  const inputs = form.querySelectorAll('input, select');
+  let isValid = true;
+  inputs.forEach(input => {
+    if (!input.value) {
+      input.classList.add('is-invalid');
+      isValid = false;
+    } else {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    }
+  });
+  return isValid;
+};
 
 const useValidation = () => {
   useEffect(() => {

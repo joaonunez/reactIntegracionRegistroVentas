@@ -1,5 +1,9 @@
 import { productos } from './producto';
 import { meseros } from './mesero';
+import Swal from 'sweetalert2';
+import $ from 'jquery';
+import { validarFormularioModal } from './validacion';
+import { useEffect } from 'react';
 
 class Venta {
     constructor(id, mesero, producto, cantidad, fecha) {
@@ -49,7 +53,7 @@ function validarYIngresarVenta() {
         ingresarVenta();
         form.reset();
         form.classList.remove('was-validated');
-        Swal.fire('Venta ingresada', 'La venta ha sido ingresada correctamente', 'success');
+        Swal.fire('Venta ingresada satisfactoriamente', '', 'success');
     } else {
         form.classList.add('was-validated');
         if (cantidad <= 0) {
@@ -88,37 +92,41 @@ function ingresarVenta() {
 }
 
 function mostrarVentas() {
-    let tbody = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = '';
-    ventas.forEach((venta, index) => {
-        let row = tbody.insertRow();
-        row.insertCell(0).innerText = venta.getId;
-        row.insertCell(1).innerText = venta.getMesero.getNombre;
-        row.insertCell(2).innerText = venta.getProducto.getNombre;
-        row.insertCell(3).innerText = venta.getCantidad;
-        row.insertCell(4).innerText = venta.getFecha;
-        row.insertCell(5).innerText = `$${venta.getProducto.getPrecio * venta.getCantidad}`;
-        
-        let editCell = row.insertCell(6);
-        let editButton = document.createElement('button');
-        editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
-        editButton.className = 'btn btn-primary';
-        editButton.setAttribute('data-bs-toggle', 'modal');
-        editButton.setAttribute('data-bs-target', '#modalEditarVenta');
-        editButton.onclick = function () {
-            abrirModalEditarVenta(index);
-        };
-        editCell.appendChild(editButton);
+    useEffect(() => {
+        let tbody = document.getElementById('tablaVentas').getElementsByTagName('tbody')[0];
+        if (tbody) {
+            tbody.innerHTML = '';
+            ventas.forEach((venta, index) => {
+                let row = tbody.insertRow();
+                row.insertCell(0).innerText = venta.getId;
+                row.insertCell(1).innerText = venta.getMesero.getNombre;
+                row.insertCell(2).innerText = venta.getProducto.getNombre;
+                row.insertCell(3).innerText = venta.getCantidad;
+                row.insertCell(4).innerText = venta.getFecha;
+                row.insertCell(5).innerText = `$${venta.getProducto.getPrecio * venta.getCantidad}`;
+                
+                let editCell = row.insertCell(6);
+                let editButton = document.createElement('button');
+                editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
+                editButton.className = 'btn btn-primary';
+                editButton.setAttribute('data-bs-toggle', 'modal');
+                editButton.setAttribute('data-bs-target', '#modalEditarVenta');
+                editButton.onclick = function () {
+                    abrirModalEditarVenta(index);
+                };
+                editCell.appendChild(editButton);
 
-        let deleteCell = row.insertCell(7);
-        let deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>';
-        deleteButton.className = 'btn btn-danger';
-        deleteButton.onclick = function () {
-            eliminarVenta(index);
-        };
-        deleteCell.appendChild(deleteButton);
-    });
+                let deleteCell = row.insertCell(7);
+                let deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>';
+                deleteButton.className = 'btn btn-danger';
+                deleteButton.onclick = function () {
+                    eliminarVenta(index);
+                };
+                deleteCell.appendChild(deleteButton);
+            });
+        }
+    }, []);
 }
 
 function abrirModalEditarVenta(index) {
@@ -132,7 +140,7 @@ function abrirModalEditarVenta(index) {
         if (validarFormularioModal('formEditarVenta')) {
             editarVenta(index);
             $('#modalEditarVenta').modal('hide');
-            Swal.fire('Cambios guardados satisfactoriamente', '', 'success');
+            Swal.fire('Venta modificada satisfactoriamente', '', 'success');
         }
     };
     $('#modalEditarVenta').modal('show');
@@ -174,13 +182,12 @@ function editarVenta(index) {
 function eliminarVenta(index) {
     ventas.splice(index, 1);
     mostrarVentas();
-    Swal.fire('Venta eliminada', 'La venta ha sido eliminada correctamente', 'success');
+    Swal.fire('Venta eliminada satisfactoriamente', '', 'success');
 }
 
-document.getElementById('ingresarVentaButton').addEventListener('click', validarYIngresarVenta);
-
-document.addEventListener('DOMContentLoaded', function () {
+useEffect(() => {
+    document.getElementById('ingresarVentaButton')?.addEventListener('click', validarYIngresarVenta);
     mostrarVentas();
-});
+}, []);
 
 export { Venta, ventas, mostrarVentas, validarYIngresarVenta, ingresarVenta, editarVenta, eliminarVenta, abrirModalEditarVenta };

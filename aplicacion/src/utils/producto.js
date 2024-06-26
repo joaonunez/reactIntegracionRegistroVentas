@@ -1,4 +1,8 @@
 import { Categoria, categorias, actualizarDropdownCategorias } from './categoria';
+import Swal from 'sweetalert2';
+import $ from 'jquery';
+import { validarFormularioModal } from './validacion';
+import { useEffect } from 'react';
 
 class Producto {
     constructor(id, nombre, categoria, precio) {
@@ -47,55 +51,65 @@ let productos = [
 ];
 
 function actualizarDropdownProductos() {
-    const comboBox1 = document.getElementById('nombreProducto');
-    comboBox1.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>';
-    productos.forEach(producto => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = `${producto.getNombre} ($${producto.getPrecio} CLP)`;
-        optionElement.value = producto.getId;
-        comboBox1.appendChild(optionElement);
-    });
+    useEffect(() => {
+        const comboBox1 = document.getElementById('nombreProducto');
+        if (comboBox1) {
+            comboBox1.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>';
+            productos.forEach(producto => {
+                const optionElement = document.createElement('option');
+                optionElement.textContent = `${producto.getNombre} ($${producto.getPrecio} CLP)`;
+                optionElement.value = producto.getId;
+                comboBox1.appendChild(optionElement);
+            });
+        }
 
-    const comboBoxEditar = document.getElementById('editarProductoVenta');
-    comboBoxEditar.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>';
-    productos.forEach(producto => {
-        const optionElement = document.createElement('option');
-        optionElement.textContent = `${producto.getNombre} ($${producto.getPrecio} CLP)`;
-        optionElement.value = producto.getId;
-        comboBoxEditar.appendChild(optionElement);
-    });
+        const comboBoxEditar = document.getElementById('editarProductoVenta');
+        if (comboBoxEditar) {
+            comboBoxEditar.innerHTML = '<option value="" selected disabled>Selecciona un producto</option>';
+            productos.forEach(producto => {
+                const optionElement = document.createElement('option');
+                optionElement.textContent = `${producto.getNombre} ($${producto.getPrecio} CLP)`;
+                optionElement.value = producto.getId;
+                comboBoxEditar.appendChild(optionElement);
+            });
+        }
+    }, []);
 }
 
 function actualizarTablaProductos() {
-    let tbody = document.getElementById('tablaProductos2').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = '';
-    productos.forEach((producto, index) => {
-        let row = tbody.insertRow();
-        row.insertCell(0).innerText = producto.getId;
-        row.insertCell(1).innerText = producto.getNombre;
-        row.insertCell(2).innerText = producto.getCategoria.getNombre;
-        row.insertCell(3).innerText = `$${producto.getPrecio}`;
+    useEffect(() => {
+        let tbody = document.getElementById('tablaProductos2').getElementsByTagName('tbody')[0];
+        if (tbody) {
+            tbody.innerHTML = '';
+            productos.forEach((producto, index) => {
+                let row = tbody.insertRow();
+                row.insertCell(0).innerText = producto.getId;
+                row.insertCell(1).innerText = producto.getNombre;
+                row.insertCell(2).innerText = producto.getCategoria.getNombre;
+                row.insertCell(3).innerText = `$${producto.getPrecio}`;
 
-        let editCell = row.insertCell(4);
-        let editButton = document.createElement('button');
-        editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
-        editButton.className = 'btn btn-primary';
-        editButton.setAttribute('data-bs-toggle', 'modal');
-        editButton.setAttribute('data-bs-target', '#modalEditarProducto');
-        editButton.onclick = function () {
-            abrirModalEditarProducto(index);
-        };
-        editCell.appendChild(editButton);
+                let editCell = row.insertCell(4);
+                let editButton = document.createElement('button');
+                editButton.innerHTML = '<i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>';
+                editButton.className = 'btn btn-primary';
+                editButton.setAttribute('data-bs-toggle', 'modal');
+                editButton.setAttribute('data-bs-target', '#modalEditarProducto');
+                editButton.onclick = function () {
+                    abrirModalEditarProducto(index);
+                };
+                editCell.appendChild(editButton);
 
-        let deleteCell = row.insertCell(5);
-        let deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>';
-        deleteButton.className = 'btn btn-danger';
-        deleteButton.onclick = function () {
-            eliminarProducto(index);
-        };
-        deleteCell.appendChild(deleteButton);
-    });
+                let deleteCell = row.insertCell(5);
+                let deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fa-solid fa-trash" style="color: #ffffff;"></i>';
+                deleteButton.className = 'btn btn-danger';
+                deleteButton.onclick = function () {
+                    eliminarProducto(index);
+                };
+                deleteCell.appendChild(deleteButton);
+            });
+        }
+    }, []);
 }
 
 function abrirModalEditarProducto(index) {
@@ -108,7 +122,7 @@ function abrirModalEditarProducto(index) {
         if (validarFormularioModal('formEditarProducto')) {
             editarProducto(index);
             $('#modalEditarProducto').modal('hide');
-            Swal.fire('Producto modificado', 'El producto ha sido modificado correctamente', 'success');
+            Swal.fire('Producto modificado satisfactoriamente', '', 'success');
         }
     };
     $('#modalEditarProducto').modal('show');
@@ -117,7 +131,7 @@ function abrirModalEditarProducto(index) {
 function editarProducto(index) {
     let producto = productos[index];
     let newNombre = document.getElementById('editarNombreProducto').value;
-    let newCategoriaId = document.getElementById('editarCategoriaProducto').value;
+    let newCategoriaId = document.getElementId('editarCategoriaProducto').value;
     let newCategoria = categorias.find(cat => cat.getId == newCategoriaId);
     let newPrecio = document.getElementById('editarPrecioProducto').value;
     producto.setNombre = newNombre;
@@ -131,7 +145,7 @@ function eliminarProducto(index) {
     productos.splice(index, 1);
     actualizarTablaProductos();
     actualizarDropdownProductos();
-    Swal.fire('Producto eliminado', 'El producto ha sido eliminado correctamente', 'success');
+    Swal.fire('Producto eliminado satisfactoriamente', '', 'success');
 }
 
 function validarYAgregarProducto() {
@@ -140,7 +154,7 @@ function validarYAgregarProducto() {
         agregarProducto();
         form.reset();
         form.classList.remove('was-validated');
-        Swal.fire('Producto ingresado', 'El producto ha sido ingresado correctamente', 'success');
+        Swal.fire('Producto ingresado satisfactoriamente', '', 'success');
     } else {
         form.classList.add('was-validated');
     }
@@ -158,29 +172,10 @@ function agregarProducto() {
     actualizarDropdownProductos();
 }
 
-document.getElementById('agregarProductoButton').addEventListener('click', validarYAgregarProducto);
-
-document.addEventListener('DOMContentLoaded', function () {
+useEffect(() => {
+    document.getElementById('agregarProductoButton')?.addEventListener('click', validarYAgregarProducto);
     actualizarTablaProductos();
     actualizarDropdownProductos();
-});
-
-document.getElementById('verProductos').addEventListener('show.bs.modal', function () {
-    const tablaProductosBody = document.querySelector('#tablaProductos tbody');
-    tablaProductosBody.innerHTML = '';
-
-    let tbody = document.getElementById('tablaProductos').getElementsByTagName('tbody')[0];
-    tbody.innerHTML = '';
-    productos.forEach((producto, index) => {
-        setTimeout(() => {
-            let row = tbody.insertRow();
-            row.classList.add('fade-in');
-            row.insertCell(0).innerText = producto.getId;
-            row.insertCell(1).innerText = producto.getNombre;
-            row.insertCell(2).innerText = producto.getCategoria.getNombre;
-            row.insertCell(3).innerText = `$${producto.getPrecio}`;
-        }, index * 10);
-    });
-});
+}, []);
 
 export { Producto, productos, actualizarDropdownProductos, actualizarTablaProductos, agregarProducto, editarProducto, eliminarProducto, abrirModalEditarProducto };

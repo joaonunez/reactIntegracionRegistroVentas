@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2';
+import $ from 'jquery';
+
 export class Categoria {
     constructor(id, nombre) {
         this._id = id;
@@ -115,4 +118,20 @@ function agregarCategoria() {
     categorias.push(new Categoria(id, nombre));
     actualizarTablaCategorias();
     actualizarDropdownCategorias();
+}
+
+function validarFormularioModal(formId) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll('input, select');
+    let isValid = true;
+    inputs.forEach(input => {
+        if (!input.value) {
+            input.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        }
+    });
+    return isValid;
 }

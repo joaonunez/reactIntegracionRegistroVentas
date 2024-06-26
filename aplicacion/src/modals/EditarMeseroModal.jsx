@@ -1,59 +1,60 @@
 import React from "react";
+
 export function EditarMeseroModal() {
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="modalEditarMesero"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="modalEditarMeseroLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalEditarMeseroLabel">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="modalEditarMeseroLabel">
               Editar Mesero
             </h5>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <form
               id="formEditarMesero"
-              class="needs-validation-meseros"
-              novalidate
+              className="needs-validation-meseros"
+              noValidate
             >
-              <div class="mb-3">
-                <label for="editarRutMesero" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="editarRutMesero" className="form-label">
                   RUT
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="editarRutMesero"
                   required
                 />
-                <div class="invalid-feedback">
+                <div className="invalid-feedback">
                   por favor ingresa un rut valido
                 </div>
               </div>
-              <div class="mb-3">
-                <label for="editarNombreMesero" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="editarNombreMesero" className="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="editarNombreMesero"
                   required
                 />
-                <div class="invalid-feedback">por favor ingresa un nombre</div>
+                <div className="invalid-feedback">por favor ingresa un nombre</div>
               </div>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Guardar Cambios
               </button>
             </form>
