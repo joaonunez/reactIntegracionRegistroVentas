@@ -10,7 +10,7 @@ export function Categorias() {
       <div className="container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xl-1 mt-5 mb-5">
         <h3>Categorías</h3>
       </div>
-      <div className="miTabla mb-5 col-12 m-auto container">
+      <div className="miTabla mb-5 col-12 col-xxl-6 m-auto container">
         <div className="mb-3 col-10 col-xxl-3">
           <label htmlFor="buscarCategorias" className="form-label justify-content-start">
             Buscar categoría por ID
@@ -22,7 +22,7 @@ export function Categorias() {
             placeholder="Buscar categoría por ID..."
           />
         </div>
-        <table className="container table table-striped table-bordered border-info text-center" id="tablaCategorias">
+        <table className="container table table-striped table-bordered border-info text-center " id="tablaCategorias">
           <thead>
             <tr>
               <th>ID</th>
@@ -36,10 +36,8 @@ export function Categorias() {
                 <td>{categoria.getId}</td>
                 <td>{categoria.getNombre}</td>
                 <td>
-                  <button className="btn btn-warning">Editar</button>
                 </td>
                 <td>
-                  <button className="btn btn-danger">Eliminar</button>
                 </td>
               </tr>
             ))}
