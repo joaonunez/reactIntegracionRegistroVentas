@@ -1,7 +1,6 @@
 import React from 'react';
-import { EditarMeseroModal } from '../modals/EditarMeseroModal';
-import useValidation from '../utils/validacion'; // Importa el hook de validación
-import { validarYAgregarMesero } from '../utils/mesero'; // Importar la función desde mesero.js
+import ReactDOM from "react-dom";
+
 
 export function Meseros() {
   useValidation(); // Utiliza el hook de validación

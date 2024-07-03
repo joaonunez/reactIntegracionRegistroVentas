@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import ReactDOM from "react-dom";
 import { EditarProductoModal } from '../modals/EditarProductoModal';
-import useValidation from '../utils/validacion';
-import { actualizarTablaProductos, actualizarDropdownProductos, validarYAgregarProducto } from '../utils/producto';
+
 
 export function Productos() {
   useValidation();

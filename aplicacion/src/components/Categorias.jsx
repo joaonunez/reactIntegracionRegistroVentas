@@ -1,7 +1,8 @@
 import React from 'react';
+import ReactDOM from "react-dom";
+
 import { EditarCategoriaModal } from '../modals/EditarCategoriaModal';
-import useValidation from '../utils/validacion'; // Importa el hook de validación
-import { validarYAgregarCategoria } from '../utils/categoria'; // Importar la función desde categoria.js
+
 
 export function Categorias() {
   useValidation(); // Utiliza el hook de validación

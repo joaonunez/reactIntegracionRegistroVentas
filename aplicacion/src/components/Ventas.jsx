@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import ReactDOM from "react-dom";
 import { VerProductosModal } from '../modals/VerProductosModal';
 import { EditarVentaModal } from '../modals/EditarVentaModal';
-import { validarYIngresarVenta, mostrarVentas } from '../utils/venta';
 
 export function Ventas() {
   useEffect(() => {
