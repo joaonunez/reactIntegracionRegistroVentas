@@ -11,16 +11,36 @@ export function MainContainer() {
     <div>
       <Nav />
       <div className="tab-content text-center mt-3" id="myTabContent">
-        <div className="tab-pane fade show active" id="ventas" role="tabpanel" aria-labelledby="ventas-tab">
+        <div
+          className="tab-pane fade show active"
+          id="ventas"
+          role="tabpanel"
+          aria-labelledby="ventas-tab"
+        >
           <Ventas />
         </div>
-        <div className="tab-pane fade" id="productos" role="tabpanel" aria-labelledby="productos-tab">
+        <div
+          className="tab-pane fade"
+          id="productos"
+          role="tabpanel"
+          aria-labelledby="productos-tab"
+        >
           <Productos />
         </div>
-        <div className="tab-pane fade" id="meseros" role="tabpanel" aria-labelledby="meseros-tab">
+        <div
+          className="tab-pane fade"
+          id="meseros"
+          role="tabpanel"
+          aria-labelledby="meseros-tab"
+        >
           <Meseros />
         </div>
-        <div className="tab-pane fade" id="categorias" role="tabpanel" aria-labelledby="categorias-tab">
+        <div
+          className="tab-pane fade"
+          id="categorias"
+          role="tabpanel"
+          aria-labelledby="categorias-tab"
+        >
           <Categorias />
         </div>
       </div>

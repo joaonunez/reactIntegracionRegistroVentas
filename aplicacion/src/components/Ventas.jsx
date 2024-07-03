@@ -29,7 +29,7 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un producto
                 </option>
-                {productos.map((producto)=>(
+                {productos.map((producto) => (
                   <option key={producto.getId} value={producto.getId}>
                     {producto.getNombre} - ${producto.getPrecio}
                   </option>
@@ -77,7 +77,7 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un mesero
                 </option>
-                {meseros.map((mesero)=>(
+                {meseros.map((mesero) => (
                   <option key={mesero.getRut} value={mesero.getRut}>
                     {mesero.getNombre}
                   </option>
@@ -115,17 +115,17 @@ export function Ventas() {
         <h3>Ventas Registradas en el Sistema</h3>
       </div>
       <div class="miTabla mb-5 col-12 m-auto container">
-      <div class="mb-3 col-10 col-xxl-3">
-        <label for="buscarVentas" class="form-label justify-content-start">
-          Buscar venta por ID
-        </label>
-        <input
-          type="text"
-          id="buscarVentas"
-          class="form-control"
-          placeholder="Buscar venta por ID..."
-        />
-      </div>
+        <div class="mb-3 col-10 col-xxl-3">
+          <label for="buscarVentas" class="form-label justify-content-start">
+            Buscar venta por ID
+          </label>
+          <input
+            type="text"
+            id="buscarVentas"
+            class="form-control"
+            placeholder="Buscar venta por ID..."
+          />
+        </div>
         <table
           class="container table table-striped table-bordered border-info text-center"
           id="tablaVentas"
@@ -144,8 +144,8 @@ export function Ventas() {
           <tbody></tbody>
         </table>
       </div>
-      <VerProductosModal/>
-      <EditarVentaModal/>
+      <VerProductosModal />
+      <EditarVentaModal />
     </div>
   );
 }
