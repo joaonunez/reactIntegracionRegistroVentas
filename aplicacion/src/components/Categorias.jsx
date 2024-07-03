@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
 import categorias from "../scripts/categorias/categoriasPreCargadas";
 
-
-
 export function Categorias() {
 
   return (
