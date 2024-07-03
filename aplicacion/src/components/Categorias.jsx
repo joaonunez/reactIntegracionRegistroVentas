@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
-import categoriasPreCargadas from "../scripts/categorias/categoriasPreCargadas";
-export function Categorias() {
-  const [categorias, setCategorias] = useState([]);
+import categorias from "../scripts/categorias/categoriasPreCargadas";
 
-  useEffect(() => {
-    // Cargar las categorías pre-cargadas al montar el componente
-    setCategorias(categoriasPreCargadas);
-  }, []);
+
+
+export function Categorias() {
 
   return (
     <div>
