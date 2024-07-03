@@ -15,4 +15,4 @@ class Categoria {
         this._nombre = nombre; // establece el nuevo nombre para la categoria
     }
 }
-export default {Categoria} ;
+export default Categoria;

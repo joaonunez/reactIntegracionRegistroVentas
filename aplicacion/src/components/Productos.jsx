@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from "react-dom";
 import { EditarProductoModal } from '../modals/EditarProductoModal';
+import productos from '../scripts/productos/productosPreCargados';
 export function Productos() {
 
   return (
@@ -23,7 +24,18 @@ export function Productos() {
               <th colSpan="2">ACCIONES</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {productos.map((producto)=>(
+              <tr key={producto.getId}> 
+              <td>{producto.getId}</td>
+              <td>{producto.getNombre}</td>
+              <td>{producto.getCategoria.getNombre}</td>
+              <td>${producto.getPrecio}</td>
+              <td></td>
+              <td></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <div className="container-fluid m-auto mt-5 col-12 col-xl-4 shadow rounded border border-info p-3">

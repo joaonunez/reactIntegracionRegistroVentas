@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
+import meseros from "../scripts/meseros/meserosPreCargados";
 export function Meseros() {
   return (
     <div>
@@ -20,7 +21,17 @@ export function Meseros() {
               <th colSpan="2">ACCIONES</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {meseros.map((mesero)=>(
+              <tr key={mesero.getRut}>
+                <td>{mesero.getRut}</td>
+                <td>{mesero.getNombre}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            
+            ))}
+          </tbody>
         </table>
       </div>
       <div className="container-fluid m-auto mt-5 col-12 col-xl-4 shadow rounded border border-info p-3 mb-5">

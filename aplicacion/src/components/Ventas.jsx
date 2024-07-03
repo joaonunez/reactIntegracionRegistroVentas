@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
-import Producto from "../class/Producto";
+import productos from "../scripts/productos/productosPreCargados";
+import meseros from "../scripts/meseros/meserosPreCargados";
 export function Ventas() {
   return (
     <div>
@@ -28,6 +29,11 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un producto
                 </option>
+                {productos.map((producto)=>(
+                  <option key={producto.getId} value={producto.getId}>
+                    {producto.getNombre} - ${producto.getPrecio}
+                  </option>
+                ))}
               </select>
               <div class="invalid-feedback">
                 por favor selecciona un producto
@@ -71,6 +77,11 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un mesero
                 </option>
+                {meseros.map((mesero)=>(
+                  <option key={mesero.getRut} value={mesero.getRut}>
+                    {mesero.getNombre}
+                  </option>
+                ))}
               </select>
               <div class="invalid-feedback">por favor selecciona un mesero</div>
             </div>

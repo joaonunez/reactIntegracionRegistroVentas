@@ -33,4 +33,4 @@ class Producto {
 
 
 
-export default {Producto};
+export default Producto;

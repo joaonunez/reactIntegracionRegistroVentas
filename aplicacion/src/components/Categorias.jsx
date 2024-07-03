@@ -1,11 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
-import categorias from "./scripts/categoriasPreCargadas";
-
-
-
+import categoriasPreCargadas from "../scripts/categorias/categoriasPreCargadas";
 export function Categorias() {
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    // Cargar las categorías pre-cargadas al montar el componente
+    setCategorias(categoriasPreCargadas);
+  }, []);
 
   return (
     <div>
@@ -13,10 +15,17 @@ export function Categorias() {
         <h3>Categorías</h3>
       </div>
       <div className="miTabla mb-5 col-12 m-auto container">
-      <div className="mb-3 col-10 col-xxl-3">
-        <label htmlFor="buscarCategorias" className="form-label justify-content-start">Buscar categoría por ID</label>
-        <input type="text" id="buscarCategorias" className="form-control" placeholder="Buscar categoría por ID..." />
-      </div>
+        <div className="mb-3 col-10 col-xxl-3">
+          <label htmlFor="buscarCategorias" className="form-label justify-content-start">
+            Buscar categoría por ID
+          </label>
+          <input
+            type="text"
+            id="buscarCategorias"
+            className="form-control"
+            placeholder="Buscar categoría por ID..."
+          />
+        </div>
         <table className="container table table-striped table-bordered border-info text-center" id="tablaCategorias">
           <thead>
             <tr>
@@ -25,7 +34,20 @@ export function Categorias() {
               <th colSpan="2">ACCIONES</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {categorias.map((categoria) => (
+              <tr key={categoria.getId}>
+                <td>{categoria.getId}</td>
+                <td>{categoria.getNombre}</td>
+                <td>
+                  <button className="btn btn-warning">Editar</button>
+                </td>
+                <td>
+                  <button className="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <div className="container-fluid m-auto mt-5 col-12 col-xl-3 shadow rounded border border-info p-3 mb-5">
@@ -36,14 +58,14 @@ export function Categorias() {
               <label htmlFor="nuevoNombreCategoria" className="form-label">Nombre</label >
               <input type="text" className="form-control" id="nuevoNombreCategoria" required /> 
               <div className="invalid-feedback">
-                por favor ingresa un nombre de categoria
+                Por favor ingresa un nombre de categoria
               </div>
             </div>
             <button type="submit" className="btn btn-info col-xl-5 m-auto text-center" id="agregarCategoriaButton">Agregar Categoría</button>
           </fieldset>
         </form>
       </div>
-      <EditarCategoriaModal/>
+      <EditarCategoriaModal />
     </div>
   );
 }
