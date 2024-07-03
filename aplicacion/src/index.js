@@ -7,7 +7,7 @@ import { Meseros } from "./components/Meseros";
 import { Categorias } from "./components/Categorias";
 import { Footer } from "./components/Footer";
 
-// Renderizar la navegación
+
 ReactDOM.render(<Nav />, document.getElementById("nav"));
 
 // Renderizar las secciones dentro de myTabContent

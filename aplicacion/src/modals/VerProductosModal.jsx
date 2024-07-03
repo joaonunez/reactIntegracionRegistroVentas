@@ -1,33 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 export function VerProductosModal() {
   return (
     <div>
       <div
-        className="modal fade modal-lg"
+        class="modal fade modal-lg"
         id="verProductos"
-        tabIndex="-1"
+        tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
                 Productos Registrados En El Sistema
               </h1>
               <button
                 type="button"
-                className="btn-close"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body miTabla">
+            <div class="modal-body miTabla">
               <table
                 id="tablaProductos"
-                className="table table-striped table-bordered container text-center"
+                class="table table-striped table-bordered container text-center"
               >
                 <thead>
                   <tr>
@@ -40,10 +39,10 @@ export function VerProductosModal() {
                 <tbody></tbody>
               </table>
             </div>
-            <div className="modal-footer">
+            <div class="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                class="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Cerrar

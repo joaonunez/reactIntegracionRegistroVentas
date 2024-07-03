@@ -3,87 +3,87 @@ import ReactDOM from "react-dom";
 export function EditarVentaModal() {
   return (
     <div
-      className="modal fade"
+      class="modal fade"
       id="modalEditarVenta"
-      tabIndex="-1"
+      tabindex="-1"
       aria-labelledby="modalEditarVentaLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="modalEditarVentaLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditarVentaLabel">
               Editar Venta
             </h5>
             <button
               type="button"
-              className="btn-close"
+              class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
+          <div class="modal-body">
             <form
               id="formEditarVenta"
-              className="needs-validation-ventas"
-              noValidate
+              class="needs-validation-ventas"
+              novalidate
             >
-              <div className="mb-3">
-                <label htmlFor="editarProductoVenta" className="form-label">
+              <div class="mb-3">
+                <label for="editarProductoVenta" class="form-label">
                   Producto
                 </label>
                 <select
                   id="editarProductoVenta"
-                  className="form-select"
+                  class="form-select"
                   required
                 ></select>
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor selecciona un producto
                 </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="editarCantidadVenta" className="form-label">
+              <div class="mb-3">
+                <label for="editarCantidadVenta" class="form-label">
                   Cantidad
                 </label>
                 <input
                   type="number"
                   id="editarCantidadVenta"
-                  className="form-control"
+                  class="form-control"
                   min="1"
                   required
                 />
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor ingresa una cantidad
                 </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="editarMeseroVenta" className="form-label">
+              <div class="mb-3">
+                <label for="editarMeseroVenta" class="form-label">
                   Mesero
                 </label>
                 <select
                   id="editarMeseroVenta"
-                  className="form-select"
+                  class="form-select"
                   required
                 ></select>
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor selecciona un mesero
                 </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="editarFechaVenta" className="form-label">
+              <div class="mb-3">
+                <label for="editarFechaVenta" class="form-label">
                   Fecha
                 </label>
                 <input
                   type="date"
                   id="editarFechaVenta"
-                  className="form-control"
+                  class="form-control"
                   required
                 />
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor selecciona una fecha
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" class="btn btn-primary">
                 Guardar Cambios
               </button>
             </form>

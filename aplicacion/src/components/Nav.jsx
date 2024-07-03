@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 export function Nav() {
   return (
     <div>

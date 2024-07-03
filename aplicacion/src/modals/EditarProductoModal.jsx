@@ -3,51 +3,51 @@ import ReactDOM from "react-dom";
 export function EditarProductoModal() {
   return (
     <div
-      className="modal fade"
+      class="modal fade"
       id="modalEditarProducto"
-      tabIndex="-1"
+      tabindex="-1"
       aria-labelledby="modalEditarProductoLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="modalEditarProductoLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditarProductoLabel">
               Editar Producto
             </h5>
             <button
               type="button"
-              className="btn-close"
+              class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
+          <div class="modal-body">
             <form
               id="formEditarProducto"
-              className="needs-validation-productos"
-              noValidate
+              class="needs-validation-productos"
+              novalidate
             >
-              <div className="mb-3">
-                <label htmlFor="editarNombreProducto" className="form-label">
+              <div class="mb-3">
+                <label for="editarNombreProducto" class="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  class="form-control"
                   id="editarNombreProducto"
                   required
                 />
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor ingresa un nombre de producto
                 </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="editarCategoriaProducto" className="form-label">
+              <div class="mb-3">
+                <label for="editarCategoriaProducto" class="form-label">
                   Categoría
                 </label>
                 <select
-                  className="form-control"
+                  class="form-control"
                   id="editarCategoriaProducto"
                   required
                 >
@@ -55,26 +55,26 @@ export function EditarProductoModal() {
                     Selecciona una categoría
                   </option>
                 </select>
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor selecciona una categoria de producto
                 </div>
               </div>
-              <div className="mb-3">
-                <label htmlFor="editarPrecioProducto" className="form-label">
+              <div class="mb-3">
+                <label for="editarPrecioProducto" class="form-label">
                   Precio
                 </label>
                 <input
                   type="number"
-                  className="form-control"
+                  class="form-control"
                   id="editarPrecioProducto"
                   min="1"
                   required
                 />
-                <div className="invalid-feedback">
+                <div class="invalid-feedback">
                   por favor ingresa un precio valido
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" class="btn btn-primary">
                 Guardar Cambios
               </button>
             </form>
