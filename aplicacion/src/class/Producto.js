@@ -1,4 +1,3 @@
-import Categoria from "./Categoria";
 class Producto {
     constructor(id, nombre, categoria, precio) {
         this._id = id;
