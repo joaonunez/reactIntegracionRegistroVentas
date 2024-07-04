@@ -4,6 +4,8 @@ import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
 import productos from "../scripts/productos/productosPreCargados";
 import meseros from "../scripts/meseros/meserosPreCargados";
+import ventas from "../scripts/ventas/VentasPreCargadas";
+import Venta from "../class/Venta";
 export function Ventas() {
   return (
     <div>
@@ -141,7 +143,20 @@ export function Ventas() {
               <th colspan="2">ACCIONES</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {ventas.map((venta)=>(
+              <tr key={venta._id}>
+                <td>{venta.getId}</td>
+                <td>{venta.getMesero.getNombre}</td>
+                <td>{venta.getProducto.getNombre}</td>
+                <td>{venta.getCantidad}</td>
+                <td>{venta.getFecha}</td>
+                <td>{venta.getCantidad * venta.getProducto.getPrecio}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <VerProductosModal />
