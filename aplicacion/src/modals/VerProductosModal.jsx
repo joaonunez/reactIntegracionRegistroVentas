@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import productos from "../scripts/productos/productosPreCargados";
 export function VerProductosModal() {
   return (
     <div>
@@ -36,7 +37,16 @@ export function VerProductosModal() {
                     <th>PRECIO</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  {productos.map((producto) => (
+                    <tr key={producto.getId}>
+                      <td>{producto.getId}</td>
+                      <td>{producto.getNombre}</td>
+                      <td>{producto.getCategoria.getNombre}</td>
+                      <td>${producto.getPrecio}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             </div>
             <div class="modal-footer">
