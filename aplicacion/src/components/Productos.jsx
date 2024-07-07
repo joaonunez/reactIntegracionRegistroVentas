@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import { EditarProductoModal } from "../modals/EditarProductoModal";
 import productos from "../scripts/productos/productosPreCargados";
+import categorias from "../scripts/categorias/categoriasPreCargadas";
 export function Productos() {
   return (
     <div>
@@ -80,8 +80,9 @@ export function Productos() {
                 <option value="" disabled selected>
                   Selecciona una categoría
                 </option>
-                <option value="1">Bebestible</option>
-                <option value="2">Comestible</option>
+                {categorias.map((categoria)=>(
+                  <option key={categoria.getId} value={categoria.getNombre}>{categoria.getNombre}</option>
+                ))}
               </select>
               <div className="invalid-feedback">
                 por favor selecciona una categoría de producto
