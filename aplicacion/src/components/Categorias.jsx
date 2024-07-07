@@ -40,8 +40,8 @@ export function Categorias() {
               <tr key={categoria.getId}>
                 <td>{categoria.getId}</td>
                 <td>{categoria.getNombre}</td>
-                <td></td>
-                <td></td>
+                <td><button className="btn btn-primary">Editar</button></td>
+                <td><button className="btn btn-danger">Eliminar</button></td>
               </tr>
             ))}
           </tbody>
