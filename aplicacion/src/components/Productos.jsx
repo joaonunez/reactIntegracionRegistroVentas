@@ -43,8 +43,8 @@ export function Productos() {
                 <td>{producto.getNombre}</td>
                 <td>{producto.getCategoria.getNombre}</td>
                 <td>${producto.getPrecio}</td>
-                <td></td>
-                <td></td>
+                <td><button className="btn btn-primary">Editar</button></td>
+                <td><button className="btn btn-danger">Eliminar</button></td>
               </tr>
             ))}
           </tbody>

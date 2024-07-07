@@ -152,8 +152,8 @@ export function Ventas() {
                 <td>{venta.getCantidad}</td>
                 <td>{venta.getFecha}</td>
                 <td>{venta.getCantidad * venta.getProducto.getPrecio}</td>
-                <td></td>
-                <td></td>
+                <td><button className="btn btn-primary">Editar</button></td>
+                <td><button className="btn btn-danger">Eliminar</button></td>
               </tr>
             ))}
           </tbody>
