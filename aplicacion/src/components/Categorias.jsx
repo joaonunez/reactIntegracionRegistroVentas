@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+/* import React, { useState, useEffect } from "react"; */
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
 import categorias from "../scripts/categorias/categoriasPreCargadas";
+import Categoria from "../class/Categoria";
 
 export function Categorias() {
+  
+  const agregarCategoria = () => {
+    let nombre = document.getElementById('nuevoNombreCategoria').value; // obtiene el nombre del input
+    let id = categorias.length ? categorias[categorias.length - 1].getId + 1 : 1; // calcula el nuevo id
+    categorias.push(new Categoria(id, nombre));
+    console.log(categorias)
+    
+  }
+
   return (
     <div>
       <div className="container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xl-1 mt-5 mb-5">
@@ -66,9 +75,9 @@ export function Categorias() {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               className="btn btn-info col-xl-5 m-auto text-center"
-              id="agregarCategoriaButton"
+              id="agregarCategoriaButton" onClick={agregarCategoria}
             >
               Agregar Categoría
             </button>

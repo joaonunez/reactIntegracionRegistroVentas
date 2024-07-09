@@ -1,4 +1,3 @@
-import Producto from "./Producto";
 class Venta {
     constructor(id, mesero, producto, cantidad, fecha) {
         this._id = id; // inicializa el id de la venta

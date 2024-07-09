@@ -1,31 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
 import productos from "../scripts/productos/productosPreCargados";
 import meseros from "../scripts/meseros/meserosPreCargados";
 import ventas from "../scripts/ventas/VentasPreCargadas";
-import Venta from "../class/Venta";
+
 export function Ventas() {
   return (
     <div>
       <form
-        class="container-fluid m-auto mt-5 col-12 col-lg-12 col-xxl-10 needs-validation-ventas"
+        className="container-fluid m-auto mt-5 col-12 col-lg-12 col-xxl-10 needs-validation-ventas"
         novalidate
       >
-        <div class="container-fluid m-auto d-flex flex-column justify-content-center text-center">
-          <div class="mt-1 mb-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xxl-5 m-auto d-flex flex-wrap shadow rounded border border-info p-3">
-            <div class="container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
+        <div className="container-fluid m-auto d-flex flex-column justify-content-center text-center">
+          <div className="mt-1 mb-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xxl-5 m-auto d-flex flex-wrap shadow rounded border border-info p-3">
+            <div className="container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
               <h3>Registro De Ventas</h3>
             </div>
-            <div class="col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
-              <label for="nombreProducto" class="form-label">
-                <p class="fw-bold">Seleccionar Producto</p>
+            <div className="col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
+              <label htmlFor="nombreProducto" className="form-label">
+                <p className="fw-bold">Seleccionar Producto</p>
               </label>
               <select
                 name="nombreProducto"
                 id="nombreProducto"
-                class="form-select form-select-sm text-center"
+                className="form-select form-select-sm text-center"
                 required
               >
                 <option value="" selected disabled>
@@ -37,43 +36,43 @@ export function Ventas() {
                   </option>
                 ))}
               </select>
-              <div class="invalid-feedback">
+              <div className="invalid-feedback">
                 por favor selecciona un producto
               </div>
             </div>
-            <div class="col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
+            <div className="col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
               <button
                 type="button"
-                class="mt-3 btn btn-info btn-sm p-2 m-auto fw-bold"
+                className="mt-3 btn btn-info btn-sm p-2 m-auto fw-bold"
                 data-bs-toggle="modal"
                 data-bs-target="#verProductos"
               >
                 Ver Productos
               </button>
             </div>
-            <div class="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
-              <label for="cantidad" class="form-label fw-bold">
+            <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
+              <label htmlFor="cantidad" className="form-label fw-bold">
                 Ingresar cantidad del producto
               </label>
               <input
                 type="number"
-                class="form-control"
+                className="form-control"
                 id="cantidad"
                 placeholder="Ingresar cantidad"
                 min="1"
                 step="1"
                 required
               />
-              <div class="invalid-feedback">por favor ingresa una cantidad</div>
+              <div className="invalid-feedback">por favor ingresa una cantidad</div>
             </div>
-            <div class="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
-              <label for="nombreMesero" class="form-label">
-                <p class="fw-bold">Seleccionar Mesero</p>
+            <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
+              <label htmlFor="nombreMesero" className="form-label">
+                <p className="fw-bold">Seleccionar Mesero</p>
               </label>
               <select
                 name="nombreMesero"
                 id="nombreMesero"
-                class="form-select form-select-sm text-center"
+                className="form-select form-select-sm text-center"
                 required
               >
                 <option value="" selected disabled>
@@ -85,25 +84,25 @@ export function Ventas() {
                   </option>
                 ))}
               </select>
-              <div class="invalid-feedback">por favor selecciona un mesero</div>
+              <div className="invalid-feedback">por favor selecciona un mesero</div>
             </div>
-            <div class="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
-              <label for="fecha" class="form-label">
-                <p class="fw-bold">Seleccionar Fecha</p>
+            <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
+              <label htmlFor="fecha" className="form-label">
+                <p className="fw-bold">Seleccionar Fecha</p>
               </label>
               <input
                 type="date"
                 name="fecha"
                 id="fecha"
-                class="form-control text-center"
+                className="form-control text-center"
                 required
               />
-              <div class="invalid-feedback">por favor selecciona una fecha</div>
+              <div className="invalid-feedback">por favor selecciona una fecha</div>
             </div>
-            <div class="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 text-center m-auto">
+            <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 text-center m-auto">
               <input
                 type="submit"
-                class="btn btn-info fw-bold"
+                className="btn btn-info fw-bold"
                 id="ingresarVentaButton"
                 value="Ingresar venta al sistema"
                 onclick="validarYIngresarVenta()"
@@ -113,23 +112,23 @@ export function Ventas() {
         </div>
       </form>
 
-      <div class="mt-5 container-fluid m-auto text-center fw-bold col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
+      <div className="mt-5 container-fluid m-auto text-center fw-bold col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
         <h3>Ventas Registradas en el Sistema</h3>
       </div>
-      <div class="miTabla mb-5 col-12 m-auto container">
-        <div class="mb-3 col-10 col-xxl-3">
-          <label for="buscarVentas" class="form-label justify-content-start">
+      <div className="miTabla mb-5 col-12 m-auto container">
+        <div className="mb-3 col-10 col-xxl-3">
+          <label htmlFor="buscarVentas" className="form-label justify-content-start">
             Buscar venta por ID
           </label>
           <input
             type="text"
             id="buscarVentas"
-            class="form-control"
+            className="form-control"
             placeholder="Buscar venta por ID..."
           />
         </div>
         <table
-          class="container table table-striped table-bordered border-info text-center"
+          className="container table table-striped table-bordered border-info text-center"
           id="tablaVentas"
         >
           <thead>

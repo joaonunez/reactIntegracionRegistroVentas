@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
 import meseros from "../scripts/meseros/meserosPreCargados";
 export function Meseros() {

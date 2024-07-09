@@ -1,5 +1,4 @@
 import Mesero from "../../class/Mesero";
-import Categoria from "../../class/Categoria";
 import Producto from "../../class/Producto";
 import Venta from "../../class/Venta";
 
