@@ -1,8 +1,20 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
-import meseros from "../scripts/meseros/meserosPreCargados";
+import meserosArray from "../scripts/meseros/meserosPreCargados";
+import Mesero from "../class/Mesero";
 export function Meseros() {
+  const[meseros, setMeseros] = useState([]);
+  useEffect(()=>{
+    setMeseros(meserosArray);
+  },[]);
+  const agregarMesero = () =>{
+    let nombre = document.getElementById('nuevoNombreMesero').value
+    let rut = document.getElementById('nuevoRutMesero').value
+    const nuevoMesero = new Mesero(rut, nombre);
+    setMeseros([...meseros, nuevoMesero]);
+    console.log([...meseros, nuevoMesero]);
+
+  }
   return (
     <div>
       <div className="container-fluid m-auto text-center fw-bold rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xl-1 mt-1 mb-5">
@@ -79,9 +91,10 @@ export function Meseros() {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               className="btn btn-info col-xl-5 m-auto text-center"
               id="agregarMeseroButton"
+              onClick={agregarMesero}
             >
               Agregar Mesero
             </button>
