@@ -11,11 +11,19 @@ export function Categorias() {
   }, []);
 
   const agregarCategoria = () => {
-    let nombre = document.getElementById('nuevoNombreCategoria').value; // obtiene el nombre del input
-    let id = categorias.length ? categorias[categorias.length - 1].getId + 1 : 1; // calcula el nuevo id
+    let nombre = document.getElementById("nuevoNombreCategoria").value;
+    let id = categorias.length
+      ? categorias[categorias.length - 1].getId + 1
+      : 1;
     const nuevaCategoria = new Categoria(id, nombre);
     setCategorias([...categorias, nuevaCategoria]);
-    console.log([...categorias, nuevaCategoria]);
+  };
+
+  const eliminarCategoria = (id) => {
+    const nuevasCategorias = categorias.filter(
+      (categoria) => categoria.getId !== id
+    );
+    setCategorias(nuevasCategorias);
   };
 
   return (
@@ -54,8 +62,17 @@ export function Categorias() {
               <tr key={categoria.getId}>
                 <td>{categoria.getId}</td>
                 <td>{categoria.getNombre}</td>
-                <td><button className="btn btn-primary">Editar</button></td>
-                <td><button className="btn btn-danger">Eliminar</button></td>
+                <td>
+                  <button className="btn btn-primary">Editar</button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => eliminarCategoria(categoria.getId)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -76,13 +93,14 @@ export function Categorias() {
                 required
               />
               <div className="invalid-feedback">
-                Por favor ingresa un nombre de categoria
+                Por favor ingresa un nombre de categoría
               </div>
             </div>
             <button
               type="button"
               className="btn btn-info col-xl-5 m-auto text-center"
-              id="agregarCategoriaButton" onClick={agregarCategoria}
+              id="agregarCategoriaButton"
+              onClick={agregarCategoria}
             >
               Agregar Categoría
             </button>

@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { EditarProductoModal } from "../modals/EditarProductoModal";
-import productos from "../scripts/productos/productosPreCargados";
-import categorias from "../scripts/categorias/categoriasPreCargadas";
+import productosArray from "../scripts/productos/productosPreCargados";
+import categoriasArray from "../scripts/categorias/categoriasPreCargadas";
+import Producto from "../class/Producto";
+
 export function Productos() {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    setProductos(productosArray);
+  }, []);
+
+  const agregarProducto = () => {
+    let nombre = document.getElementById('nuevoNombreProducto').value;
+    let categoriaId = parseInt(document.getElementById('nuevaCategoriaProducto').value);
+    let categoriaSeleccionada = categoriasArray.find(cat => cat.getId === categoriaId);
+    let precio = parseInt(document.getElementById('nuevoPrecioProducto').value);
+    let id = productos.length ? productos[productos.length - 1].getId + 1 : 1;
+    const nuevoProducto = new Producto(id, nombre, categoriaSeleccionada, precio);
+    setProductos([...productos, nuevoProducto]);
+  };
+
+  const eliminarProducto = (id) => {
+    const nuevosProductos = productos.filter(producto => producto.getId !== id);
+    setProductos(nuevosProductos);
+  };
+
   return (
     <div>
       <div className="mt-5 container-fluid m-auto text-center fw-bold shadow rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xxl-8 mt-1 mb-5">
@@ -31,7 +54,7 @@ export function Productos() {
             <tr>
               <th>ID</th>
               <th>NOMBRE</th>
-              <th>CATEGORIA</th>
+              <th>CATEGORÍA</th>
               <th>PRECIO</th>
               <th colSpan="2">ACCIONES</th>
             </tr>
@@ -44,7 +67,7 @@ export function Productos() {
                 <td>{producto.getCategoria.getNombre}</td>
                 <td>${producto.getPrecio}</td>
                 <td><button className="btn btn-primary">Editar</button></td>
-                <td><button className="btn btn-danger">Eliminar</button></td>
+                <td><button className="btn btn-danger" onClick={() => eliminarProducto(producto.getId)}>Eliminar</button></td>
               </tr>
             ))}
           </tbody>
@@ -65,7 +88,7 @@ export function Productos() {
                 required
               />
               <div className="invalid-feedback">
-                por favor ingresa un nombre de producto
+                Por favor ingresa un nombre de producto
               </div>
             </div>
             <div className="mb-3">
@@ -80,12 +103,12 @@ export function Productos() {
                 <option value="" disabled selected>
                   Selecciona una categoría
                 </option>
-                {categorias.map((categoria)=>(
-                  <option key={categoria.getId} value={categoria.getNombre}>{categoria.getNombre}</option>
+                {categoriasArray.map((categoria) => (
+                  <option key={categoria.getId} value={categoria.getId}>{categoria.getNombre}</option>
                 ))}
               </select>
               <div className="invalid-feedback">
-                por favor selecciona una categoría de producto
+                Por favor selecciona una categoría de producto
               </div>
             </div>
             <div className="mb-3">
@@ -100,13 +123,14 @@ export function Productos() {
                 required
               />
               <div className="invalid-feedback">
-                por favor ingresa un precio valido
+                Por favor ingresa un precio válido
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               className="btn btn-info"
               id="agregarProductoButton"
+              onClick={agregarProducto}
             >
               Agregar Producto
             </button>

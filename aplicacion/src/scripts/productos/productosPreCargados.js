@@ -1,7 +1,7 @@
 import Categoria from "../../class/Categoria";
 import Producto from "../../class/Producto";
 
-let productos = [
+let productosArray = [
   // array de productos inicializados con varios objetos producto
   new Producto(1, "Café Espresso", new Categoria(1, "Bebestible"), 1500),
   new Producto(2, "Capuccino", new Categoria(1, "Bebestible"), 2000),
@@ -21,4 +21,4 @@ let productos = [
   new Producto(11, "Helado de Vainilla", new Categoria(2, "Comestible"), 2000),
 ];
 
-export default productos;
+export default productosArray;

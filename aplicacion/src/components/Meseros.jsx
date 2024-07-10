@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
 import meserosArray from "../scripts/meseros/meserosPreCargados";
 import Mesero from "../class/Mesero";
+
 export function Meseros() {
-  const[meseros, setMeseros] = useState([]);
-  useEffect(()=>{
+  const [meseros, setMeseros] = useState([]);
+
+  useEffect(() => {
     setMeseros(meserosArray);
-  },[]);
-  const agregarMesero = () =>{
-    let nombre = document.getElementById('nuevoNombreMesero').value
-    let rut = document.getElementById('nuevoRutMesero').value
+  }, []);
+
+  const agregarMesero = () => {
+    let nombre = document.getElementById("nuevoNombreMesero").value;
+    let rut = document.getElementById("nuevoRutMesero").value;
     const nuevoMesero = new Mesero(rut, nombre);
     setMeseros([...meseros, nuevoMesero]);
-    console.log([...meseros, nuevoMesero]);
+  };
 
-  }
+  const eliminarMesero = (rut) => {
+    const nuevosMeseros = meseros.filter((mesero) => mesero.getRut !== rut);
+    setMeseros(nuevosMeseros);
+  };
+
   return (
     <div>
       <div className="container-fluid m-auto text-center fw-bold rounded col-10 col-sm-8 col-md-6 col-lg-4 col-xl-1 mt-1 mb-5">
@@ -51,8 +58,17 @@ export function Meseros() {
               <tr key={mesero.getRut}>
                 <td>{mesero.getRut}</td>
                 <td>{mesero.getNombre}</td>
-                <td><button className="btn btn-primary">Editar</button></td>
-                <td><button className="btn btn-danger">Eliminar</button></td>
+                <td>
+                  <button className="btn btn-primary">Editar</button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => eliminarMesero(mesero.getRut)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -73,7 +89,7 @@ export function Meseros() {
                 required
               />
               <div className="invalid-feedback">
-                por favor ingresa un rut valido
+                Por favor ingresa un rut válido
               </div>
             </div>
             <div className="mb-3">
@@ -87,7 +103,7 @@ export function Meseros() {
                 required
               />
               <div className="invalid-feedback">
-                por favor ingresa un nombre
+                Por favor ingresa un nombre
               </div>
             </div>
             <button
