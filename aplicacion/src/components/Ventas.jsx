@@ -3,7 +3,7 @@ import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
 import productos from "../scripts/productos/productosPreCargados";
 import meseros from "../scripts/meseros/meserosPreCargados";
-
+import ventas from "../scripts/ventas/ventasPreCargadas";
 
 export function Ventas() {
   return (
