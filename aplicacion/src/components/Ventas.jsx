@@ -7,6 +7,7 @@ import ventasArray from "../scripts/ventas/VentasPreCargadas";
 
 export function Ventas() {
   const[ventas,setVentas] = useState([]);
+  /* hola */
   return (
     <div>
       <form
