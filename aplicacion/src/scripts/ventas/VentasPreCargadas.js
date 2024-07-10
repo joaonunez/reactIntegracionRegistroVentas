@@ -2,7 +2,7 @@ import Mesero from "../../class/Mesero";
 import Producto from "../../class/Producto";
 import Venta from "../../class/Venta";
 
-let ventas = [
+let ventasBase = [
     new Venta(
       1,
       new Mesero("18.232.243-5", "Eduardo Gomez"), // Crea el Mesero directamente
@@ -20,4 +20,4 @@ let ventas = [
     // Agrega más ventas según sea necesario
   ];
 
-export default ventas;
+export default ventasBase;

@@ -1,17 +1,22 @@
-/* import React, { useState, useEffect } from "react"; */
+import React, { useState, useEffect } from "react";
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
-import categorias from "../scripts/categorias/categoriasPreCargadas";
+import categoriasPreCargadas from "../scripts/categorias/categoriasPreCargadas";
 import Categoria from "../class/Categoria";
 
 export function Categorias() {
-  
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    setCategorias(categoriasPreCargadas);
+  }, []);
+
   const agregarCategoria = () => {
     let nombre = document.getElementById('nuevoNombreCategoria').value; // obtiene el nombre del input
     let id = categorias.length ? categorias[categorias.length - 1].getId + 1 : 1; // calcula el nuevo id
-    categorias.push(new Categoria(id, nombre));
-    console.log(categorias)
-    
-  }
+    const nuevaCategoria = new Categoria(id, nombre);
+    setCategorias([...categorias, nuevaCategoria]);
+    console.log([...categorias, nuevaCategoria]);
+  };
 
   return (
     <div>
