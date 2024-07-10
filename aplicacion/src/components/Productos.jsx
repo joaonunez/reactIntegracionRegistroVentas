@@ -19,11 +19,13 @@ export function Productos() {
     let id = productos.length ? productos[productos.length - 1].getId + 1 : 1;
     const nuevoProducto = new Producto(id, nombre, categoriaSeleccionada, precio);
     setProductos([...productos, nuevoProducto]);
+    console.log([productos])
   };
 
   const eliminarProducto = (id) => {
     const nuevosProductos = productos.filter(producto => producto.getId !== id);
     setProductos(nuevosProductos);
+    console.log([productos])
   };
 
   return (

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
 import productos from "../scripts/productos/productosPreCargados";
 import meseros from "../scripts/meseros/meserosPreCargados";
-import ventas from "../scripts/ventas/VentasPreCargadas";
+import ventasArray from "../scripts/ventas/VentasPreCargadas";
 
 export function Ventas() {
+  const[ventas,setVentas] = useState([]);
   return (
     <div>
       <form
