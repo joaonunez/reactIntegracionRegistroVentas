@@ -32,7 +32,15 @@ export function Ventas() {
       cantidad,
       fecha
     );
+    if (idMesero === "" || isNaN(idProducto) || !productoSeleccionado || isNaN(cantidad) || fecha === "") {
+      alert("Por favor completa todos los campos correctamente.");
+      return; // Evita continuar si algún campo está vacío o incorrecto
+    }
     setVentas([...ventas, nuevaVenta]);
+    document.getElementById("nombreMesero").value = "";
+    document.getElementById("nombreProducto").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("fecha").value = "";
     console.log([ventas]);
   };
   

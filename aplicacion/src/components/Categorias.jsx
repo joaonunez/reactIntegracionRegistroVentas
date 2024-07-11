@@ -16,7 +16,12 @@ export function Categorias() {
       ? categorias[categorias.length - 1].getId + 1
       : 1;
     const nuevaCategoria = new Categoria(id, nombre);
+    if (nombre === "") {
+      alert("Por favor ingresa un nombre de categoría válido.");
+      return; // Evita continuar si el nombre está vacío
+    }
     setCategorias([...categorias, nuevaCategoria]);
+    document.getElementById("nuevoNombreCategoria").value = "";
   };
 
   const eliminarCategoria = (id) => {
