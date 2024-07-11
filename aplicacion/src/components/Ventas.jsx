@@ -8,10 +8,12 @@ import Venta from "../class/Venta";
 
 export function Ventas() {
   const [ventas, setVentas] = useState([]);
+  const [ventaActual, setVentaActual] = useState(null);
 
   useEffect(() => {
     setVentas(ventasArray);
   }, []);
+
   const agregarVenta = () => {
     let idVenta = ventas.length ? ventas[ventas.length - 1].getId + 1 : 1;
     let idMesero = document.getElementById("nombreMesero").value;
@@ -43,17 +45,37 @@ export function Ventas() {
     document.getElementById("fecha").value = "";
     console.log([ventas]);
   };
-  
+
   const eliminarVenta = (id) => {
     const nuevasVentas = ventas.filter(venta => venta.getId !== id);
     setVentas(nuevasVentas);
     console.log([ventas])
   };
+
+  const iniciarEdicionVenta = (venta) => {
+    setVentaActual(venta);
+    const modal = new window.bootstrap.Modal(document.getElementById("modalEditarVenta"));
+    modal.show();
+  };
+
+  const guardarCambiosVenta = (ventaEditada) => {
+    const nuevasVentas = ventas.map((venta) =>
+      venta.getId === ventaEditada.getId ? ventaEditada : venta
+    );
+    setVentas(nuevasVentas);
+    const modal = window.bootstrap.Modal.getInstance(document.getElementById("modalEditarVenta"));
+    modal.hide();
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("de-DE").format(price);
+  };
+
   return (
     <div>
       <form
         className="container-fluid m-auto mt-5 col-12 col-lg-12 col-xxl-10 needs-validation-ventas"
-        novalidate
+        noValidate
       >
         <div className="container-fluid m-auto d-flex flex-column justify-content-center text-center">
           <div className="mt-1 mb-3 col-12 col-sm-10 col-md-8 col-lg-6 col-xxl-5 m-auto d-flex flex-wrap shadow rounded border border-info p-3">
@@ -75,7 +97,7 @@ export function Ventas() {
                 </option>
                 {productosArray.map((producto) => (
                   <option key={producto.getId} value={producto.getId}>
-                    {producto.getNombre} - ${producto.getPrecio}
+                    {producto.getNombre} - ${formatPrice(producto.getPrecio)}
                   </option>
                 ))}
               </select>
@@ -192,23 +214,28 @@ export function Ventas() {
               <th>Cantidad</th>
               <th>Fecha</th>
               <th>Total</th>
-              <th colspan="2">ACCIONES</th>
+              <th colSpan="2">ACCIONES</th>
             </tr>
           </thead>
           <tbody>
             {ventas.map((venta) => (
-              <tr key={venta._id}>
+              <tr key={venta.getId}>
                 <td>{venta.getId}</td>
                 <td>{venta.getMesero.getNombre}</td>
                 <td>{venta.getProducto.getNombre}</td>
                 <td>{venta.getCantidad}</td>
                 <td>{venta.getFecha}</td>
-                <td>{'$'+(venta.getCantidad * venta.getProducto.getPrecio)}</td>
+                <td>{'$'+formatPrice(venta.getCantidad * venta.getProducto.getPrecio)}</td>
                 <td>
-                  <button className="btn btn-primary">Editar</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => iniciarEdicionVenta(venta)}
+                  >
+                    Editar
+                  </button>
                 </td>
                 <td>
-                  <button className="btn btn-danger" onClick={()=>eliminarVenta(venta.getId)}>Eliminar</button>
+                  <button className="btn btn-danger" onClick={() => eliminarVenta(venta.getId)}>Eliminar</button>
                 </td>
               </tr>
             ))}
@@ -216,7 +243,7 @@ export function Ventas() {
         </table>
       </div>
       <VerProductosModal />
-      <EditarVentaModal />
+      <EditarVentaModal venta={ventaActual} onSave={guardarCambiosVenta} />
     </div>
   );
 }

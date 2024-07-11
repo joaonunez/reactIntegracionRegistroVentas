@@ -5,6 +5,7 @@ import Mesero from "../class/Mesero";
 
 export function Meseros() {
   const [meseros, setMeseros] = useState([]);
+  const [meseroActual, setMeseroActual] = useState(null);
 
   useEffect(() => {
     setMeseros(meserosArray);
@@ -16,7 +17,7 @@ export function Meseros() {
     const nuevoMesero = new Mesero(rut, nombre);
     if (rut === "" || nombre === "") {
       alert("Por favor ingresa un RUT y nombre de mesero válidos.");
-      return; // Evita continuar si algún campo está vacío
+      return;
     }
     setMeseros([...meseros, nuevoMesero]);
     document.getElementById("nuevoNombreMesero").value = "";
@@ -26,6 +27,21 @@ export function Meseros() {
   const eliminarMesero = (rut) => {
     const nuevosMeseros = meseros.filter((mesero) => mesero.getRut !== rut);
     setMeseros(nuevosMeseros);
+  };
+
+  const iniciarEdicionMesero = (mesero) => {
+    setMeseroActual(mesero);
+    const modal = new window.bootstrap.Modal(document.getElementById("modalEditarMesero"));
+    modal.show();
+  };
+
+  const guardarCambiosMesero = (meseroEditado) => {
+    const nuevosMeseros = meseros.map((mesero) =>
+      mesero.getRut === meseroEditado.getRut ? meseroEditado : mesero
+    );
+    setMeseros(nuevosMeseros);
+    const modal = window.bootstrap.Modal.getInstance(document.getElementById("modalEditarMesero"));
+    modal.hide();
   };
 
   return (
@@ -65,7 +81,12 @@ export function Meseros() {
                 <td>{mesero.getRut}</td>
                 <td>{mesero.getNombre}</td>
                 <td>
-                  <button className="btn btn-primary">Editar</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => iniciarEdicionMesero(mesero)}
+                  >
+                    Editar
+                  </button>
                 </td>
                 <td>
                   <button
@@ -123,7 +144,7 @@ export function Meseros() {
           </fieldset>
         </form>
       </div>
-      <EditarMeseroModal />
+      <EditarMeseroModal mesero={meseroActual} onSave={guardarCambiosMesero} />
     </div>
   );
 }

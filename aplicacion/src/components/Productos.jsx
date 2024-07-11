@@ -6,6 +6,7 @@ import Producto from "../class/Producto";
 
 export function Productos() {
   const [productos, setProductos] = useState([]);
+  const [productoActual, setProductoActual] = useState(null);
 
   useEffect(() => {
     setProductos(productosArray);
@@ -21,12 +22,6 @@ export function Productos() {
     );
     let precio = parseInt(document.getElementById("nuevoPrecioProducto").value);
     let id = productos.length ? productos[productos.length - 1].getId + 1 : 1;
-    const nuevoProducto = new Producto(
-      id,
-      nombre,
-      categoriaSeleccionada,
-      precio
-    );
     if (
       nombre === "" ||
       isNaN(categoriaId) ||
@@ -36,11 +31,16 @@ export function Productos() {
       alert("Por favor completa todos los campos correctamente.");
       return; // Evita continuar si algún campo está vacío o incorrecto
     }
+    const nuevoProducto = new Producto(
+      id,
+      nombre,
+      categoriaSeleccionada,
+      precio
+    );
     setProductos([...productos, nuevoProducto]);
     document.getElementById("nuevoNombreProducto").value = "";
     document.getElementById("nuevaCategoriaProducto").value = "";
     document.getElementById("nuevoPrecioProducto").value = "";
-    console.log([productos]);
   };
 
   const eliminarProducto = (id) => {
@@ -48,7 +48,29 @@ export function Productos() {
       (producto) => producto.getId !== id
     );
     setProductos(nuevosProductos);
-    console.log([productos]);
+  };
+
+  const iniciarEdicionProducto = (producto) => {
+    setProductoActual(producto);
+    const modal = new window.bootstrap.Modal(
+      document.getElementById("modalEditarProducto")
+    );
+    modal.show();
+  };
+
+  const guardarCambiosProducto = (productoEditado) => {
+    const nuevosProductos = productos.map((producto) =>
+      producto.getId === productoEditado.getId ? productoEditado : producto
+    );
+    setProductos(nuevosProductos);
+    const modal = window.bootstrap.Modal.getInstance(
+      document.getElementById("modalEditarProducto")
+    );
+    modal.hide();
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("de-DE").format(price);
   };
 
   return (
@@ -90,9 +112,14 @@ export function Productos() {
                 <td>{producto.getId}</td>
                 <td>{producto.getNombre}</td>
                 <td>{producto.getCategoria.getNombre}</td>
-                <td>${producto.getPrecio}</td>
+                <td>${formatPrice(producto.getPrecio)}</td>
                 <td>
-                  <button className="btn btn-primary">Editar</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => iniciarEdicionProducto(producto)}
+                  >
+                    Editar
+                  </button>
                 </td>
                 <td>
                   <button
@@ -173,7 +200,7 @@ export function Productos() {
           </fieldset>
         </form>
       </div>
-      <EditarProductoModal />
+      <EditarProductoModal producto={productoActual} onSave={guardarCambiosProducto} />
     </div>
   );
 }
