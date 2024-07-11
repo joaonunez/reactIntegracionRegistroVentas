@@ -5,6 +5,7 @@ import Categoria from "../class/Categoria";
 
 export function Categorias() {
   const [categorias, setCategorias] = useState([]);
+  const [categoriaActual, setCategoriaActual] = useState(null);
 
   useEffect(() => {
     setCategorias(categoriasPreCargadas);
@@ -12,23 +13,34 @@ export function Categorias() {
 
   const agregarCategoria = () => {
     let nombre = document.getElementById("nuevoNombreCategoria").value;
-    let id = categorias.length
-      ? categorias[categorias.length - 1].getId + 1
-      : 1;
-    const nuevaCategoria = new Categoria(id, nombre);
+    let id = categorias.length ? categorias[categorias.length - 1].getId + 1 : 1;
     if (nombre === "") {
       alert("Por favor ingresa un nombre de categoría válido.");
-      return; // Evita continuar si el nombre está vacío
+      return;
     }
+    const nuevaCategoria = new Categoria(id, nombre);
     setCategorias([...categorias, nuevaCategoria]);
     document.getElementById("nuevoNombreCategoria").value = "";
   };
 
   const eliminarCategoria = (id) => {
-    const nuevasCategorias = categorias.filter(
-      (categoria) => categoria.getId !== id
+    const nuevasCategorias = categorias.filter((categoria) => categoria.getId !== id);
+    setCategorias(nuevasCategorias);
+  };
+
+  const iniciarEdicionCategoria = (categoria) => {
+    setCategoriaActual(categoria);
+    const modal = new window.bootstrap.Modal(document.getElementById("modalEditarCategoria"));
+    modal.show();
+  };
+
+  const guardarCambiosCategoria = (categoriaEditada) => {
+    const nuevasCategorias = categorias.map((categoria) =>
+      categoria.getId === categoriaEditada.getId ? categoriaEditada : categoria
     );
     setCategorias(nuevasCategorias);
+    const modal = window.bootstrap.Modal.getInstance(document.getElementById("modalEditarCategoria"));
+    modal.hide();
   };
 
   return (
@@ -38,10 +50,7 @@ export function Categorias() {
       </div>
       <div className="miTabla mb-5 col-12 col-xxl-6 m-auto container">
         <div className="mb-3 col-10 col-xxl-3">
-          <label
-            htmlFor="buscarCategorias"
-            className="form-label justify-content-start"
-          >
+          <label htmlFor="buscarCategorias" className="form-label justify-content-start">
             Buscar categoría por ID
           </label>
           <input
@@ -51,10 +60,7 @@ export function Categorias() {
             placeholder="Buscar categoría por ID..."
           />
         </div>
-        <table
-          className="container table table-striped table-bordered border-info text-center "
-          id="tablaCategorias"
-        >
+        <table className="container table table-striped table-bordered border-info text-center" id="tablaCategorias">
           <thead>
             <tr>
               <th>ID</th>
@@ -68,13 +74,12 @@ export function Categorias() {
                 <td>{categoria.getId}</td>
                 <td>{categoria.getNombre}</td>
                 <td>
-                  <button className="btn btn-primary">Editar</button>
+                  <button className="btn btn-primary" onClick={() => iniciarEdicionCategoria(categoria)}>
+                    Editar
+                  </button>
                 </td>
                 <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => eliminarCategoria(categoria.getId)}
-                  >
+                  <button className="btn btn-danger" onClick={() => eliminarCategoria(categoria.getId)}>
                     Eliminar
                   </button>
                 </td>
@@ -91,15 +96,8 @@ export function Categorias() {
               <label htmlFor="nuevoNombreCategoria" className="form-label">
                 Nombre
               </label>
-              <input
-                type="text"
-                className="form-control"
-                id="nuevoNombreCategoria"
-                required
-              />
-              <div className="invalid-feedback">
-                Por favor ingresa un nombre de categoría
-              </div>
+              <input type="text" className="form-control" id="nuevoNombreCategoria" required />
+              <div className="invalid-feedback">Por favor ingresa un nombre de categoría</div>
             </div>
             <button
               type="button"
@@ -112,7 +110,7 @@ export function Categorias() {
           </fieldset>
         </form>
       </div>
-      <EditarCategoriaModal />
+      <EditarCategoriaModal categoria={categoriaActual} onSave={guardarCambiosCategoria} />
     </div>
   );
 }

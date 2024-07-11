@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Categoria from "../class/Categoria";
+export function EditarCategoriaModal({ categoria, onSave }) {
+  const [nombre, setNombre] = useState("");
 
-export function EditarCategoriaModal() {
+  useEffect(() => {
+    if (categoria) {
+      setNombre(categoria.getNombre);
+    }
+  }, [categoria]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (nombre.trim() === "") {
+      alert("Por favor ingresa un nombre de categoría válido.");
+      return;
+    }
+    const categoriaEditada = new Categoria(categoria.getId, nombre);
+    onSave(categoriaEditada);
+  };
+
   return (
     <div
       className="modal fade"
       id="modalEditarCategoria"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="modalEditarCategoriaLabel"
       aria-hidden="true"
     >
@@ -26,20 +44,23 @@ export function EditarCategoriaModal() {
             <form
               id="formEditarCategoria"
               className="needs-validation-categorias"
-              novalidate
+              noValidate
+              onSubmit={handleSubmit}
             >
               <div className="mb-3">
-                <label for="editarNombreCategoria" className="form-label">
+                <label htmlFor="editarNombreCategoria" className="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="editarNombreCategoria"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                   required
                 />
                 <div className="invalid-feedback">
-                  por favor ingresa un nombre de categoria
+                  Por favor ingresa un nombre de categoría
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">
