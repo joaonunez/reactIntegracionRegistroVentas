@@ -12,20 +12,43 @@ export function Productos() {
   }, []);
 
   const agregarProducto = () => {
-    let nombre = document.getElementById('nuevoNombreProducto').value;
-    let categoriaId = parseInt(document.getElementById('nuevaCategoriaProducto').value);
-    let categoriaSeleccionada = categoriasArray.find(cat => cat.getId === categoriaId);
-    let precio = parseInt(document.getElementById('nuevoPrecioProducto').value);
+    let nombre = document.getElementById("nuevoNombreProducto").value;
+    let categoriaId = parseInt(
+      document.getElementById("nuevaCategoriaProducto").value
+    );
+    let categoriaSeleccionada = categoriasArray.find(
+      (cat) => cat.getId === categoriaId
+    );
+    let precio = parseInt(document.getElementById("nuevoPrecioProducto").value);
     let id = productos.length ? productos[productos.length - 1].getId + 1 : 1;
-    const nuevoProducto = new Producto(id, nombre, categoriaSeleccionada, precio);
+    const nuevoProducto = new Producto(
+      id,
+      nombre,
+      categoriaSeleccionada,
+      precio
+    );
+    if (
+      nombre === "" ||
+      isNaN(categoriaId) ||
+      !categoriaSeleccionada ||
+      isNaN(precio)
+    ) {
+      alert("Por favor completa todos los campos correctamente.");
+      return; // Evita continuar si algún campo está vacío o incorrecto
+    }
     setProductos([...productos, nuevoProducto]);
-    console.log([productos])
+    document.getElementById("nuevoNombreProducto").value = "";
+    document.getElementById("nuevaCategoriaProducto").value = "";
+    document.getElementById("nuevoPrecioProducto").value = "";
+    console.log([productos]);
   };
 
   const eliminarProducto = (id) => {
-    const nuevosProductos = productos.filter(producto => producto.getId !== id);
+    const nuevosProductos = productos.filter(
+      (producto) => producto.getId !== id
+    );
     setProductos(nuevosProductos);
-    console.log([productos])
+    console.log([productos]);
   };
 
   return (
@@ -68,8 +91,17 @@ export function Productos() {
                 <td>{producto.getNombre}</td>
                 <td>{producto.getCategoria.getNombre}</td>
                 <td>${producto.getPrecio}</td>
-                <td><button className="btn btn-primary">Editar</button></td>
-                <td><button className="btn btn-danger" onClick={() => eliminarProducto(producto.getId)}>Eliminar</button></td>
+                <td>
+                  <button className="btn btn-primary">Editar</button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => eliminarProducto(producto.getId)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -106,7 +138,9 @@ export function Productos() {
                   Selecciona una categoría
                 </option>
                 {categoriasArray.map((categoria) => (
-                  <option key={categoria.getId} value={categoria.getId}>{categoria.getNombre}</option>
+                  <option key={categoria.getId} value={categoria.getId}>
+                    {categoria.getNombre}
+                  </option>
                 ))}
               </select>
               <div className="invalid-feedback">

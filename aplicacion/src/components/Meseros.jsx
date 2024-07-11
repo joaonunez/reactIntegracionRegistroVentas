@@ -14,7 +14,13 @@ export function Meseros() {
     let nombre = document.getElementById("nuevoNombreMesero").value;
     let rut = document.getElementById("nuevoRutMesero").value;
     const nuevoMesero = new Mesero(rut, nombre);
+    if (rut === "" || nombre === "") {
+      alert("Por favor ingresa un RUT y nombre de mesero válidos.");
+      return; // Evita continuar si algún campo está vacío
+    }
     setMeseros([...meseros, nuevoMesero]);
+    document.getElementById("nuevoNombreMesero").value = "";
+    document.getElementById("nuevoRutMesero").value = "";
   };
 
   const eliminarMesero = (rut) => {
