@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Mesero from "../class/Mesero"; // Importar la clase Mesero
 
-export function EditarMeseroModal() {
+export function EditarMeseroModal({ mesero, onSave }) {
+  const [nombre, setNombre] = useState("");
+  const [rut, setRut] = useState("");
+
+  useEffect(() => {
+    if (mesero) {
+      setNombre(mesero.getNombre);
+      setRut(mesero.getRut);
+    }
+  }, [mesero]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (rut.trim() === "" || nombre.trim() === "") {
+      alert("Por favor ingresa un RUT y nombre de mesero válidos.");
+      return;
+    }
+    const meseroEditado = new Mesero(rut, nombre);
+    onSave(meseroEditado);
+  };
+
   return (
     <div
       className="modal fade"
       id="modalEditarMesero"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="modalEditarMeseroLabel"
       aria-hidden="true"
     >
@@ -26,33 +47,40 @@ export function EditarMeseroModal() {
             <form
               id="formEditarMesero"
               className="needs-validation-meseros"
-              novalidate
+              noValidate
+              onSubmit={handleSubmit}
             >
               <div className="mb-3">
-                <label for="editarRutMesero" className="form-label">
+                <label htmlFor="editarRutMesero" className="form-label">
                   RUT
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="editarRutMesero"
+                  value={rut}
+                  onChange={(e) => setRut(e.target.value)}
                   required
                 />
                 <div className="invalid-feedback">
-                  por favor ingresa un rut valido
+                  Por favor ingresa un rut válido
                 </div>
               </div>
               <div className="mb-3">
-                <label for="editarNombreMesero" className="form-label">
+                <label htmlFor="editarNombreMesero" className="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="editarNombreMesero"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                   required
                 />
-                <div className="invalid-feedback">por favor ingresa un nombre</div>
+                <div className="invalid-feedback">
+                  Por favor ingresa un nombre
+                </div>
               </div>
               <button type="submit" className="btn btn-primary">
                 Guardar Cambios

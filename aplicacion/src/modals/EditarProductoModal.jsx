@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Producto from "../class/Producto"; // Importar la clase Producto
 
-export function EditarProductoModal() {
+import categoriasArray from "../scripts/categorias/categoriasPreCargadas"; // Importar las categorías
+
+export function EditarProductoModal({ producto, onSave }) {
+  const [nombre, setNombre] = useState("");
+  const [categoriaId, setCategoriaId] = useState("");
+  const [precio, setPrecio] = useState("");
+
+  useEffect(() => {
+    if (producto) {
+      setNombre(producto.getNombre);
+      setCategoriaId(producto.getCategoria.getId);
+      setPrecio(producto.getPrecio);
+    }
+  }, [producto]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const categoriaSeleccionada = categoriasArray.find(
+      (cat) => cat.getId === parseInt(categoriaId)
+    );
+    if (
+      nombre.trim() === "" ||
+      isNaN(categoriaId) ||
+      !categoriaSeleccionada ||
+      isNaN(precio)
+    ) {
+      alert("Por favor completa todos los campos correctamente.");
+      return;
+    }
+    const productoEditado = new Producto(
+      producto.getId,
+      nombre,
+      categoriaSeleccionada,
+      precio
+    );
+    onSave(productoEditado);
+  };
+
   return (
     <div
       className="modal fade"
       id="modalEditarProducto"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="modalEditarProductoLabel"
       aria-hidden="true"
     >
@@ -26,52 +64,64 @@ export function EditarProductoModal() {
             <form
               id="formEditarProducto"
               className="needs-validation-productos"
-              novalidate
+              noValidate
+              onSubmit={handleSubmit}
             >
               <div className="mb-3">
-                <label for="editarNombreProducto" className="form-label">
+                <label htmlFor="editarNombreProducto" className="form-label">
                   Nombre
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="editarNombreProducto"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                   required
                 />
                 <div className="invalid-feedback">
-                  por favor ingresa un nombre de producto
+                  Por favor ingresa un nombre de producto
                 </div>
               </div>
               <div className="mb-3">
-                <label for="editarCategoriaProducto" className="form-label">
+                <label htmlFor="editarCategoriaProducto" className="form-label">
                   Categoría
                 </label>
                 <select
                   className="form-control"
                   id="editarCategoriaProducto"
+                  value={categoriaId}
+                  onChange={(e) => setCategoriaId(e.target.value)}
                   required
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Selecciona una categoría
                   </option>
+                  {categoriasArray.map((categoria) => (
+                    <option key={categoria.getId} value={categoria.getId}>
+                      {categoria.getNombre}
+                    </option>
+                  ))}
                 </select>
                 <div className="invalid-feedback">
-                  por favor selecciona una categoria de producto
+                  Por favor selecciona una categoría de producto
                 </div>
               </div>
               <div className="mb-3">
-                <label for="editarPrecioProducto" className="form-label">
+                <label htmlFor="editarPrecioProducto" className="form-label">
                   Precio
                 </label>
                 <input
                   type="number"
                   className="form-control"
                   id="editarPrecioProducto"
+                  value={precio}
+                  onChange={(e) => setPrecio(e.target.value)}
                   min="1"
                   required
                 />
                 <div className="invalid-feedback">
-                  por favor ingresa un precio valido
+                  Por favor ingresa un precio válido
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">
