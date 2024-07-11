@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
-import productos from "../scripts/productos/productosPreCargados";
-import meseros from "../scripts/meseros/meserosPreCargados";
+import meserosArray from "../scripts/meseros/meserosPreCargados";
 import ventasArray from "../scripts/ventas/VentasPreCargadas";
+import productosArray from "../scripts/productos/productosPreCargados";
+import Venta from "../class/Venta";
 
 export function Ventas() {
-  const[ventas,setVentas] = useState([]);
-  /* hola */
+  const [ventas, setVentas] = useState([]);
+
+  useEffect(() => {
+    setVentas(ventasArray);
+  }, []);
+  const agregarVenta = () => {
+    let idVenta = ventas.length ? ventas[ventas.length - 1].getId + 1 : 1;
+    let idMesero = document.getElementById("nombreMesero").value;
+    let meseroSeleccionado = meserosArray.find(
+      (mesero) => mesero.getRut === idMesero
+    );
+    let idProducto = parseInt(document.getElementById("nombreProducto").value);
+    let productoSeleccionado = productosArray.find(
+      (producto) => producto.getId === idProducto
+    );
+    let cantidad = parseInt(document.getElementById("cantidad").value);
+    let fecha = document.getElementById("fecha").value;
+
+    const nuevaVenta = new Venta(
+      idVenta,
+      meseroSeleccionado,
+      productoSeleccionado,
+      cantidad,
+      fecha
+    );
+    setVentas([...ventas, nuevaVenta]);
+    console.log([ventas]);
+  };
   return (
     <div>
       <form
@@ -32,7 +59,7 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un producto
                 </option>
-                {productos.map((producto) => (
+                {productosArray.map((producto) => (
                   <option key={producto.getId} value={producto.getId}>
                     {producto.getNombre} - ${producto.getPrecio}
                   </option>
@@ -65,7 +92,9 @@ export function Ventas() {
                 step="1"
                 required
               />
-              <div className="invalid-feedback">por favor ingresa una cantidad</div>
+              <div className="invalid-feedback">
+                por favor ingresa una cantidad
+              </div>
             </div>
             <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
               <label htmlFor="nombreMesero" className="form-label">
@@ -80,13 +109,15 @@ export function Ventas() {
                 <option value="" selected disabled>
                   Selecciona un mesero
                 </option>
-                {meseros.map((mesero) => (
+                {meserosArray.map((mesero) => (
                   <option key={mesero.getRut} value={mesero.getRut}>
                     {mesero.getNombre}
                   </option>
                 ))}
               </select>
-              <div className="invalid-feedback">por favor selecciona un mesero</div>
+              <div className="invalid-feedback">
+                por favor selecciona un mesero
+              </div>
             </div>
             <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-7 text-center m-auto">
               <label htmlFor="fecha" className="form-label">
@@ -99,16 +130,19 @@ export function Ventas() {
                 className="form-control text-center"
                 required
               />
-              <div className="invalid-feedback">por favor selecciona una fecha</div>
+              <div className="invalid-feedback">
+                por favor selecciona una fecha
+              </div>
             </div>
             <div className="mt-5 col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 text-center m-auto">
-              <input
-                type="submit"
+              <button
+                type="button"
                 className="btn btn-info fw-bold"
                 id="ingresarVentaButton"
-                value="Ingresar venta al sistema"
-                onclick="validarYIngresarVenta()"
-              />
+                onClick={agregarVenta}
+              >
+                Ingresar venta al sistema
+              </button>
             </div>
           </div>
         </div>
@@ -119,7 +153,10 @@ export function Ventas() {
       </div>
       <div className="miTabla mb-5 col-12 m-auto container">
         <div className="mb-3 col-10 col-xxl-3">
-          <label htmlFor="buscarVentas" className="form-label justify-content-start">
+          <label
+            htmlFor="buscarVentas"
+            className="form-label justify-content-start"
+          >
             Buscar venta por ID
           </label>
           <input
@@ -145,7 +182,7 @@ export function Ventas() {
             </tr>
           </thead>
           <tbody>
-            {ventas.map((venta)=>(
+            {ventas.map((venta) => (
               <tr key={venta._id}>
                 <td>{venta.getId}</td>
                 <td>{venta.getMesero.getNombre}</td>
@@ -153,8 +190,12 @@ export function Ventas() {
                 <td>{venta.getCantidad}</td>
                 <td>{venta.getFecha}</td>
                 <td>{venta.getCantidad * venta.getProducto.getPrecio}</td>
-                <td><button className="btn btn-primary">Editar</button></td>
-                <td><button className="btn btn-danger">Eliminar</button></td>
+                <td>
+                  <button className="btn btn-primary">Editar</button>
+                </td>
+                <td>
+                  <button className="btn btn-danger">Eliminar</button>
+                </td>
               </tr>
             ))}
           </tbody>
