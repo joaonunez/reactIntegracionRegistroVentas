@@ -35,6 +35,12 @@ export function Ventas() {
     setVentas([...ventas, nuevaVenta]);
     console.log([ventas]);
   };
+  
+  const eliminarVenta = (id) => {
+    const nuevasVentas = ventas.filter(venta => venta.getId !== id);
+    setVentas(nuevasVentas);
+    console.log([ventas])
+  };
   return (
     <div>
       <form
@@ -189,12 +195,12 @@ export function Ventas() {
                 <td>{venta.getProducto.getNombre}</td>
                 <td>{venta.getCantidad}</td>
                 <td>{venta.getFecha}</td>
-                <td>{venta.getCantidad * venta.getProducto.getPrecio}</td>
+                <td>{'$'+(venta.getCantidad * venta.getProducto.getPrecio)}</td>
                 <td>
                   <button className="btn btn-primary">Editar</button>
                 </td>
                 <td>
-                  <button className="btn btn-danger">Eliminar</button>
+                  <button className="btn btn-danger" onClick={()=>eliminarVenta(venta.getId)}>Eliminar</button>
                 </td>
               </tr>
             ))}
