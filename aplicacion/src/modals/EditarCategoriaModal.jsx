@@ -19,7 +19,7 @@ export function EditarCategoriaModal({ categoria, onSave }) {
     onSave(categoriaEditada);
   };
 
-  return (s
+  return (
     <div
       className="modal fade"
       id="modalEditarCategoria"
