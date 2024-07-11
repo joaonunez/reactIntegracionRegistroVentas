@@ -1,5 +1,5 @@
 import React from "react";
-import productos from "../scripts/productos/productosPreCargados";
+import productosArray from "../scripts/productos/productosPreCargados";
 export function VerProductosModal() {
   return (
     <div>
@@ -37,7 +37,7 @@ export function VerProductosModal() {
                   </tr>
                 </thead>
                 <tbody>
-                  {productos.map((producto) => (
+                  {productosArray.map((producto) => (
                     <tr key={producto.getId}>
                       <td>{producto.getId}</td>
                       <td>{producto.getNombre}</td>
