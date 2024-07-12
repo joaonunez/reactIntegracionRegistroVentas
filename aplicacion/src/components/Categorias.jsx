@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { EditarCategoriaModal } from "../modals/EditarCategoriaModal";
-import categoriasPreCargadas from "../scripts/categorias/categoriasPreCargadas";
+import { GlobalContext } from "./GlobalContext";
 import Categoria from "../class/Categoria";
 
 export function Categorias() {
-  const [categorias, setCategorias] = useState([]);
+  const { categorias, setCategorias } = useContext(GlobalContext);
   const [categoriaActual, setCategoriaActual] = useState(null);
-
-  useEffect(() => {
-    setCategorias(categoriasPreCargadas);
-  }, []);
 
   const agregarCategoria = () => {
     let nombre = document.getElementById("nuevoNombreCategoria").value;

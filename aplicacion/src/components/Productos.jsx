@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { EditarProductoModal } from "../modals/EditarProductoModal";
-import productosArray from "../scripts/productos/productosPreCargados";
-import categoriasArray from "../scripts/categorias/categoriasPreCargadas";
+import { GlobalContext } from "./GlobalContext";
 import Producto from "../class/Producto";
 
 export function Productos() {
-  const [productos, setProductos] = useState([]);
+  const { productos, setProductos, categorias } = useContext(GlobalContext);
   const [productoActual, setProductoActual] = useState(null);
-
-  useEffect(() => {
-    setProductos(productosArray);
-  }, []);
 
   const agregarProducto = () => {
     let nombre = document.getElementById("nuevoNombreProducto").value;
     let categoriaId = parseInt(
       document.getElementById("nuevaCategoriaProducto").value
     );
-    let categoriaSeleccionada = categoriasArray.find(
+    let categoriaSeleccionada = categorias.find(
       (cat) => cat.getId === categoriaId
     );
     let precio = parseInt(document.getElementById("nuevoPrecioProducto").value);
@@ -164,7 +159,7 @@ export function Productos() {
                 <option value="" disabled selected>
                   Selecciona una categoría
                 </option>
-                {categoriasArray.map((categoria) => (
+                {categorias.map((categoria) => (
                   <option key={categoria.getId} value={categoria.getId}>
                     {categoria.getNombre}
                   </option>
