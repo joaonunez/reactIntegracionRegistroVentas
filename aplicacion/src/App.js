@@ -1,6 +1,6 @@
 import React from "react";
 import { MainContainer } from "./components/MainContainer";
-import { GlobalProvider } from "./components/GlobalContext";
+import { GlobalProvider } from "../src/components/GlobalContext";
 
 function App() {
   return (
