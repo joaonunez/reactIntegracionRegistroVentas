@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Producto from "../class/Producto"; // Importar la clase Producto
-
-import categoriasArray from "../scripts/categorias/categoriasPreCargadas"; // Importar las categorías
+import { GlobalContext } from "../components/GlobalContext"; // Importar el contexto global
 
 export function EditarProductoModal({ producto, onSave }) {
+  const { categorias } = useContext(GlobalContext); // Obtener categorías del contexto
   const [nombre, setNombre] = useState("");
   const [categoriaId, setCategoriaId] = useState("");
   const [precio, setPrecio] = useState("");
@@ -18,7 +18,7 @@ export function EditarProductoModal({ producto, onSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const categoriaSeleccionada = categoriasArray.find(
+    const categoriaSeleccionada = categorias.find(
       (cat) => cat.getId === parseInt(categoriaId)
     );
     if (
@@ -97,7 +97,7 @@ export function EditarProductoModal({ producto, onSave }) {
                   <option value="" disabled>
                     Selecciona una categoría
                   </option>
-                  {categoriasArray.map((categoria) => (
+                  {categorias.map((categoria) => (
                     <option key={categoria.getId} value={categoria.getId}>
                       {categoria.getNombre}
                     </option>
