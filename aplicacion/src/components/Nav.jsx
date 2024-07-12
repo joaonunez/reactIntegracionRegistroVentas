@@ -1,10 +1,14 @@
 import React from "react";
-
+import cafeImage from "../assets/images/taza-de-cafe.png"
 export function Nav() {
   return (
     <div>
       <div className="mt-3 m-auto text-center">
         <h1>Gestion Sistema De Negocio</h1>
+        <div className="m-auto text-center">
+          <img className="mb-5" style={{width:"100px"}} src={cafeImage} alt="" />
+
+        </div>
       </div>
       <ul
         className="nav nav-tabs d-flex justify-content-center"
