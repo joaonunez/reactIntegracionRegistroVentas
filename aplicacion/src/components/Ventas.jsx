@@ -4,8 +4,7 @@ import { EditarVentaModal } from "../modals/EditarVentaModal";
 import { GlobalContext } from "./GlobalContext";
 import Venta from "../class/Venta";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
 export function Ventas() {
   const { meseros, productos, ventas, setVentas } = useContext(GlobalContext);
@@ -23,6 +22,23 @@ export function Ventas() {
     );
     let cantidad = parseInt(document.getElementById("cantidad").value);
     let fecha = document.getElementById("fecha").value;
+    let fechaActual = new Date().toISOString().split("T")[0]; // Obtener la fecha actual en formato YYYY-MM-DD
+
+    // Validaciones
+    if (idMesero === "" || isNaN(idProducto) || !productoSeleccionado || isNaN(cantidad) || fecha === "") {
+      alert("Por favor completa todos los campos correctamente.");
+      return;
+    }
+
+    if (cantidad <= 0) {
+      alert("La cantidad debe ser un número positivo.");
+      return;
+    }
+
+    if (fecha > fechaActual) {
+      alert("La fecha no puede ser futura.");
+      return;
+    }
 
     const nuevaVenta = new Venta(
       idVenta,
@@ -31,10 +47,7 @@ export function Ventas() {
       cantidad,
       fecha
     );
-    if (idMesero === "" || isNaN(idProducto) || !productoSeleccionado || isNaN(cantidad) || fecha === "") {
-      alert("Por favor completa todos los campos correctamente.");
-      return; // Evita continuar si algún campo está vacío o incorrecto
-    }
+
     setVentas([...ventas, nuevaVenta]);
     document.getElementById("nombreMesero").value = "";
     document.getElementById("nombreProducto").value = "";
@@ -60,6 +73,13 @@ export function Ventas() {
     setVentas(nuevasVentas);
     const modal = window.bootstrap.Modal.getInstance(document.getElementById("modalEditarVenta"));
     modal.hide();
+  };
+
+  const handleCantidadChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value < 0) {
+      e.target.value = 1; // Prevenir valores negativos
+    }
   };
 
   const formatPrice = (price) => {
@@ -122,6 +142,7 @@ export function Ventas() {
                 placeholder="Ingresar cantidad"
                 min="1"
                 step="1"
+                onChange={handleCantidadChange}
                 required
               />
               <div className="invalid-feedback">
@@ -162,6 +183,7 @@ export function Ventas() {
                 id="fecha"
                 className="form-control text-center"
                 required
+                max={new Date().toISOString().split("T")[0]} // Fecha máxima es hoy
               />
               <div className="invalid-feedback">
                 por favor selecciona una fecha
