@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
-import meserosArray from "../scripts/meseros/meserosPreCargados";
-import ventasArray from "../scripts/ventas/VentasPreCargadas";
-import productosArray from "../scripts/productos/productosPreCargados";
+import { GlobalContext } from "./GlobalContext";
 import Venta from "../class/Venta";
 
 export function Ventas() {
-  const [ventas, setVentas] = useState([]);
+  const { meseros, productos, ventas, setVentas } = useContext(GlobalContext);
   const [ventaActual, setVentaActual] = useState(null);
-
-  useEffect(() => {
-    setVentas(ventasArray);
-  }, []);
 
   const agregarVenta = () => {
     let idVenta = ventas.length ? ventas[ventas.length - 1].getId + 1 : 1;
     let idMesero = document.getElementById("nombreMesero").value;
-    let meseroSeleccionado = meserosArray.find(
+    let meseroSeleccionado = meseros.find(
       (mesero) => mesero.getRut === idMesero
     );
     let idProducto = parseInt(document.getElementById("nombreProducto").value);
-    let productoSeleccionado = productosArray.find(
+    let productoSeleccionado = productos.find(
       (producto) => producto.getId === idProducto
     );
     let cantidad = parseInt(document.getElementById("cantidad").value);
@@ -43,13 +37,11 @@ export function Ventas() {
     document.getElementById("nombreProducto").value = "";
     document.getElementById("cantidad").value = "";
     document.getElementById("fecha").value = "";
-    console.log([ventas]);
   };
 
   const eliminarVenta = (id) => {
     const nuevasVentas = ventas.filter(venta => venta.getId !== id);
     setVentas(nuevasVentas);
-    console.log([ventas])
   };
 
   const iniciarEdicionVenta = (venta) => {
@@ -91,11 +83,12 @@ export function Ventas() {
                 id="nombreProducto"
                 className="form-select form-select-sm text-center"
                 required
+                defaultValue=""
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   Selecciona un producto
                 </option>
-                {productosArray.map((producto) => (
+                {productos && productos.map((producto) => (
                   <option key={producto.getId} value={producto.getId}>
                     {producto.getNombre} - ${formatPrice(producto.getPrecio)}
                   </option>
@@ -141,11 +134,12 @@ export function Ventas() {
                 id="nombreMesero"
                 className="form-select form-select-sm text-center"
                 required
+                defaultValue=""
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   Selecciona un mesero
                 </option>
-                {meserosArray.map((mesero) => (
+                {meseros && meseros.map((mesero) => (
                   <option key={mesero.getRut} value={mesero.getRut}>
                     {mesero.getNombre}
                   </option>
@@ -218,7 +212,7 @@ export function Ventas() {
             </tr>
           </thead>
           <tbody>
-            {ventas.map((venta) => (
+            {ventas && ventas.map((venta) => (
               <tr key={venta.getId}>
                 <td>{venta.getId}</td>
                 <td>{venta.getMesero.getNombre}</td>

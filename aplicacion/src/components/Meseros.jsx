@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
-import meserosArray from "../scripts/meseros/meserosPreCargados";
+import { GlobalContext } from "./GlobalContext";
 import Mesero from "../class/Mesero";
 
 export function Meseros() {
-  const [meseros, setMeseros] = useState([]);
+  const { meseros, setMeseros } = useContext(GlobalContext);
   const [meseroActual, setMeseroActual] = useState(null);
-
-  useEffect(() => {
-    setMeseros(meserosArray);
-  }, []);
 
   const agregarMesero = () => {
     let nombre = document.getElementById("nuevoNombreMesero").value;
