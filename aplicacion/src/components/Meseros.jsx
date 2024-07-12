@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import { EditarMeseroModal } from "../modals/EditarMeseroModal";
 import { GlobalContext } from "./GlobalContext";
 import Mesero from "../class/Mesero";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 export function Meseros() {
   const { meseros, setMeseros } = useContext(GlobalContext);
   const [meseroActual, setMeseroActual] = useState(null);
@@ -27,7 +29,9 @@ export function Meseros() {
 
   const iniciarEdicionMesero = (mesero) => {
     setMeseroActual(mesero);
-    const modal = new window.bootstrap.Modal(document.getElementById("modalEditarMesero"));
+    const modal = new window.bootstrap.Modal(
+      document.getElementById("modalEditarMesero")
+    );
     modal.show();
   };
 
@@ -36,7 +40,9 @@ export function Meseros() {
       mesero.getRut === meseroEditado.getRut ? meseroEditado : mesero
     );
     setMeseros(nuevosMeseros);
-    const modal = window.bootstrap.Modal.getInstance(document.getElementById("modalEditarMesero"));
+    const modal = window.bootstrap.Modal.getInstance(
+      document.getElementById("modalEditarMesero")
+    );
     modal.hide();
   };
 
@@ -81,7 +87,7 @@ export function Meseros() {
                     className="btn btn-primary"
                     onClick={() => iniciarEdicionMesero(mesero)}
                   >
-                    Editar
+                    <FontAwesomeIcon icon={faPen} />
                   </button>
                 </td>
                 <td>
@@ -89,7 +95,7 @@ export function Meseros() {
                     className="btn btn-danger"
                     onClick={() => eliminarMesero(mesero.getRut)}
                   >
-                    Eliminar
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>
