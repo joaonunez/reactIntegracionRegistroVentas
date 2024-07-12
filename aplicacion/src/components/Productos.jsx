@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import { EditarProductoModal } from "../modals/EditarProductoModal";
 import { GlobalContext } from "./GlobalContext";
 import Producto from "../class/Producto";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 export function Productos() {
   const { productos, setProductos, categorias } = useContext(GlobalContext);
   const [productoActual, setProductoActual] = useState(null);
@@ -113,7 +115,7 @@ export function Productos() {
                     className="btn btn-primary"
                     onClick={() => iniciarEdicionProducto(producto)}
                   >
-                    Editar
+                    <FontAwesomeIcon icon={faPen} />
                   </button>
                 </td>
                 <td>
@@ -121,7 +123,7 @@ export function Productos() {
                     className="btn btn-danger"
                     onClick={() => eliminarProducto(producto.getId)}
                   >
-                    Eliminar
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>
@@ -195,7 +197,10 @@ export function Productos() {
           </fieldset>
         </form>
       </div>
-      <EditarProductoModal producto={productoActual} onSave={guardarCambiosProducto} />
+      <EditarProductoModal
+        producto={productoActual}
+        onSave={guardarCambiosProducto}
+      />
     </div>
   );
 }

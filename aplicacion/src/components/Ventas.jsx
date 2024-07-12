@@ -3,6 +3,9 @@ import { VerProductosModal } from "../modals/VerProductosModal";
 import { EditarVentaModal } from "../modals/EditarVentaModal";
 import { GlobalContext } from "./GlobalContext";
 import Venta from "../class/Venta";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 export function Ventas() {
   const { meseros, productos, ventas, setVentas } = useContext(GlobalContext);
@@ -225,11 +228,13 @@ export function Ventas() {
                     className="btn btn-primary"
                     onClick={() => iniciarEdicionVenta(venta)}
                   >
-                    Editar
+                    <FontAwesomeIcon icon={faPen} />
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => eliminarVenta(venta.getId)}>Eliminar</button>
+                  <button className="btn btn-danger" onClick={() => eliminarVenta(venta.getId)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </td>
               </tr>
             ))}
