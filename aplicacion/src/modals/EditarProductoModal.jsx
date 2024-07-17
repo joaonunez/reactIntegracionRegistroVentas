@@ -16,6 +16,14 @@ export function EditarProductoModal({ producto, onSave }) {
     }
   }, [producto]);
 
+  const handlePrecioChange = (e) => {
+    const value = parseFloat(e.target.value);
+    if (value < 0) {
+      e.target.value = 1; // Prevenir valores negativos
+    }
+    setPrecio(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const categoriaSeleccionada = categorias.find(
@@ -116,7 +124,7 @@ export function EditarProductoModal({ producto, onSave }) {
                   className="form-control"
                   id="editarPrecioProducto"
                   value={precio}
-                  onChange={(e) => setPrecio(e.target.value)}
+                  onChange={handlePrecioChange}
                   min="1"
                   required
                 />

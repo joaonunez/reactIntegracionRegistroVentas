@@ -3,8 +3,8 @@ import { EditarProductoModal } from "../modals/EditarProductoModal";
 import { GlobalContext } from "./GlobalContext";
 import Producto from "../class/Producto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+
 export function Productos() {
   const { productos, setProductos, categorias } = useContext(GlobalContext);
   const [productoActual, setProductoActual] = useState(null);
@@ -19,15 +19,19 @@ export function Productos() {
     );
     let precio = parseInt(document.getElementById("nuevoPrecioProducto").value);
     let id = productos.length ? productos[productos.length - 1].getId + 1 : 1;
+
+    // Validaciones
     if (
       nombre === "" ||
       isNaN(categoriaId) ||
       !categoriaSeleccionada ||
-      isNaN(precio)
+      isNaN(precio) ||
+      precio <= 0
     ) {
       alert("Por favor completa todos los campos correctamente.");
       return; // Evita continuar si algún campo está vacío o incorrecto
     }
+
     const nuevoProducto = new Producto(
       id,
       nombre,
@@ -64,6 +68,13 @@ export function Productos() {
       document.getElementById("modalEditarProducto")
     );
     modal.hide();
+  };
+
+  const handlePrecioChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value < 0) {
+      e.target.value = 1; // Prevenir valores negativos
+    }
   };
 
   const formatPrice = (price) => {
@@ -180,6 +191,7 @@ export function Productos() {
                 className="form-control"
                 id="nuevoPrecioProducto"
                 min="1"
+                onChange={handlePrecioChange}
                 required
               />
               <div className="invalid-feedback">
