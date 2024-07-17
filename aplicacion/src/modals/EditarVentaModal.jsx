@@ -18,6 +18,14 @@ export function EditarVentaModal({ venta, onSave }) {
     }
   }, [venta]);
 
+  const handleCantidadChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value < 0) {
+      e.target.value = 1; // Prevenir valores negativos
+    }
+    setCantidad(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const meseroSeleccionado = meserosArray.find((mesero) => mesero.getRut === meseroId);
@@ -97,12 +105,12 @@ export function EditarVentaModal({ venta, onSave }) {
                   id="editarCantidadVenta"
                   className="form-control"
                   value={cantidad}
-                  onChange={(e) => setCantidad(e.target.value)}
+                  onChange={handleCantidadChange}
                   min="1"
                   required
                 />
                 <div className="invalid-feedback">
-                  Por favor ingresa una cantidad
+                  Por favor ingresa una cantidad válida
                 </div>
               </div>
               <div className="mb-3">
@@ -142,7 +150,7 @@ export function EditarVentaModal({ venta, onSave }) {
                   required
                 />
                 <div className="invalid-feedback">
-                  Por favor selecciona una fecha
+                  Por favor selecciona una fecha válida
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">
